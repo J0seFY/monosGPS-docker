@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: monos
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: establecimientos
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  db_data:
