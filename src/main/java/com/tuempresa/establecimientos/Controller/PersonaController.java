@@ -23,15 +23,15 @@ public class PersonaController {
         this.personaService = service;
     }
 
-    @GetMapping("/buscar")
-    public ResponseEntity<Map<String, List<?>>> buscarPorNombre(@RequestParam String nombre) {
+    @GetMapping("/buscar/{nombre}")
+    public ResponseEntity<Map<String, List<?>>> buscarPorNombre(@PathVariable String nombre) {
         Map<String, List<?>> response = Map.of("personas", personaService.buscarPorNombre(nombre));
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PersonaDTO> buscarPorId(@PathVariable Long id) {
-        PersonaDTO persona = personaService.buscarPorRut(id.toString());
+    public ResponseEntity<PersonaDTO> buscarPorId(@PathVariable String id) {
+        PersonaDTO persona = personaService.buscarPorRut(id);
         if (persona != null) {
             return ResponseEntity.ok(persona);
         } else {
@@ -39,4 +39,3 @@ public class PersonaController {
         }
     }
 }
-
