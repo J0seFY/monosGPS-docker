@@ -1,0 +1,12 @@
+.card {
+    border-radius: 10px;
+  }
+  .card-header {
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+  }
+  .card-body {
+    padding: 20px;
+  }
+  

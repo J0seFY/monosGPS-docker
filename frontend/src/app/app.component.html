@@ -1,0 +1,25 @@
+<!-- Header -->
+<header class="bg-warning d-flex justify-content-between align-items-center p-3">
+  <div><strong>GESTOR COMUNAL DE ESTABLECIMIENTOS</strong></div>
+  <nav>
+    <a href="#" class="me-3 text-dark text-decoration-none fw-bold">Page</a>
+    <a href="#" class="me-3 text-dark text-decoration-none fw-bold">Page</a>
+    <a routerLink="/login" class="btn btn-dark">Iniciar Sesión</a>
+    <a routerLink="/register" class="btn btn-dark">Registrarse</a>
+  </nav>
+</header>
+
+<!-- Contenido dinámico -->
+<main class="py-5 px-3 min-vh-75">
+  <router-outlet></router-outlet>
+</main>
+
+<!-- Footer -->
+<footer class="bg-light p-4 d-flex justify-content-between">
+  <div>Site name</div>
+  <div class="d-flex gap-4">
+    <div>Topic<br>Page<br>Page</div>
+    <div>Topic<br>Page<br>Page</div>
+    <div>Topic<br>Page<br>Page</div>
+  </div>
+</footer>

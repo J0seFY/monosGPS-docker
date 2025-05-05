@@ -1,0 +1,11 @@
+/* Puedes agregar estilos específicos para el componente aquí */
+.card-img-top {
+    max-height: 200px;
+    object-fit: cover;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
