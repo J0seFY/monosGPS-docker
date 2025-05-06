@@ -1,0 +1,14 @@
+<div class="container">
+    <form class="mx-auto" style="max-width: 500px;">
+      <div class="mb-3">
+        <input type="text" class="form-control" placeholder="RUT" [(ngModel)]="rut" name="rut" required />
+      </div>
+      <div class="mb-3">
+        <input type="password" class="form-control" placeholder="Contraseña" [(ngModel)]="password" name="password" required />
+      </div>
+      <button type="submit" class="btn btn-dark w-100" [disabled]="!rut || !password">
+        Iniciar sesión
+      </button>
+    </form>
+  </div>
+  
