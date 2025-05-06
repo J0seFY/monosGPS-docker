@@ -1,0 +1,38 @@
+
+
+  .card-img-top {
+    width: 100%;             /* Asegura que ocupen todo el ancho de la tarjeta */
+    height: 200px;           /* Altura fija para mantener uniformidad */
+    object-fit: cover;       /* Recorta la imagen sin deformarla */
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Suaviza el aspecto */
+    transition: transform 0.3s ease;         /* Animación al pasar el mouse */
+  }
+  
+  .card-img-top:hover {
+    transform: scale(1.03);  /* Efecto sutil al hacer hover */
+  }
+
+  .img-large {
+    height: 300px;
+    object-fit: cover;
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .img-large:hover {
+    transform: scale(1.03);
+  }
+  
+  
+  
+  .btn-primary {
+    background-color: #bd9141;
+    border-color: #080808;
+    border-width:0.3cap;
+  }
+  
