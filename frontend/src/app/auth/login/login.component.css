@@ -1,12 +1,27 @@
-.card {
-    border-radius: 10px;
-  }
-  .card-header {
-    background-color: #007bff;
-    color: white;
-    text-align: center;
-  }
-  .card-body {
-    padding: 20px;
-  }
-  
+/* Centrado del contenido de la página */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60vh; /* Asegura que el contenedor ocupe toda la altura de la pantalla */
+}
+
+/* Estilos para el formulario */
+form {
+  display: block;
+  width: 100%; /* Asegura que el formulario se ajuste bien */
+  max-width: 500px;
+  margin: 0 auto; /* Centra el formulario */
+}
+
+/* Estilo para los botones */
+button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* Estilo de las entradas de texto */
+.mb-3 {
+  margin-bottom: 1rem;
+}
