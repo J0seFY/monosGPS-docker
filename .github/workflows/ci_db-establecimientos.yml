@@ -27,6 +27,6 @@ jobs:
       - name: Build and push image
         uses: docker/build-push-action@v5
         with:
-          context: ./database-establecimientos
+          context: ./db-establecimientos
           push: true
           tags: fyjo/monosgps:establecimientos-db
