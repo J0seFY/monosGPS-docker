@@ -39,13 +39,12 @@ export class RegisterComponent {
     this.userService.register(this.user).subscribe({
         next: (res) => {
             console.log('Usuario registrado correctamente', res);
-            this.router.navigate(['/login']); // redirige después del registro
+            this.router.navigate(['/login']); 
         },
         error: (err) => {
             console.error('Error al registrar usuario', err);
             alert('Error al registrar. Verifica los datos.');
 
-            // Mostrar el error completo en consola para más detalles
             console.log('Detalles del error:', err);
         }
     });
