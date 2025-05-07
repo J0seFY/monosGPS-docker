@@ -1,6 +1,7 @@
 name: Build & Push DB Establecimientos
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'database-establecimientos/**'

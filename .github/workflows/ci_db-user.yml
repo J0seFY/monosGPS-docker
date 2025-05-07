@@ -1,6 +1,7 @@
 name: Build & Push DB Usuarios
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'database-usuarios/**'
