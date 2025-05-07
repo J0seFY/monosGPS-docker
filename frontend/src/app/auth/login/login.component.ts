@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { UserDTO } from '../register/register.component';
+import { UserService } from '../user.service';
 import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-login',
@@ -6,16 +8,16 @@ import { NgForm } from '@angular/forms';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  rut: string = '';
-  password: string = '';
+  user: UserDTO = {
+    rut: '',
+    nombres: '',
+    apellido1: '',
+    email: '',
+    establecimiento: '',
+    password: ''
+  };
 
-  onSubmit() {
-    if (this.rut && this.password) {
-      console.log('RUT:', this.rut);
-      console.log('Contraseña:', this.password);
-      // Aquí puedes agregar la lógica para autenticar al usuario
-    } else {
-      alert('Por favor complete todos los campos');
-    }
-  }
+  constructor(private userService: UserService) {}
+
+  
 }

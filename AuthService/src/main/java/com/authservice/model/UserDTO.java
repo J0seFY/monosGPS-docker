@@ -6,9 +6,7 @@ public class UserDTO {
 
     private String nombres;
     private String apellido1;
-    private String apellido2;
     private String email;
-    private String rol;
     private String establecimiento;
     private String password;
 
@@ -36,28 +34,12 @@ public class UserDTO {
         this.apellido1 = apellido1;
     }
 
-    public String getApellido2() {
-        return apellido2;
-    }
-
-    public void setApellido2(String apellido2) {
-        this.apellido2 = apellido2;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getRol() {
-        return rol;
-    }
-
-    public void setRol(String rol) {
-        this.rol = rol;
     }
 
     public String getEstablecimiento() {
