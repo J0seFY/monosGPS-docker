@@ -28,4 +28,4 @@ jobs:
         with:
           context: ./database-establecimientos
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/establecimientos-db:latest
+          tags: fyjo/monosgps:establecimientos-db

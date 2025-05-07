@@ -29,4 +29,4 @@ jobs:
           context: ./AuthService
           file: ./AuthService/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/authservice:latest
+          tags: fyjo/monosgps:authservice

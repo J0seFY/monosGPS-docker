@@ -29,4 +29,4 @@ jobs:
           context: ./BuscarPersonas
           file: ./BuscarPersonas/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/buscarpersonas:latest
+          tags: fyjo/monosgps:buscarpersonas
