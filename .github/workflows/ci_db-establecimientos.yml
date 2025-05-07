@@ -28,5 +28,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./db-establecimientos
+          file: ./db-establecimientos/Dockerfile
           push: true
           tags: fyjo/monosgps:establecimientos-db
