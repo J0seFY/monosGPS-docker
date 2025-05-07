@@ -11,7 +11,7 @@ env:
   IMAGE_NAME: user-db
   RESOURCE_GROUP: monosGPS
   CONTAINER_APP: user-db-app
-  ACR_SERVER: monosgpsacr.azurecr.io
+  ACR_SERVER: monosgps.azurecr.io
 
 jobs:
   build-and-deploy:
