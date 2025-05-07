@@ -1,4 +1,4 @@
-name: Build and Push AuthService
+name: Build and Push BuscarPersonas
 
 on:
   workflow_dispatch:
