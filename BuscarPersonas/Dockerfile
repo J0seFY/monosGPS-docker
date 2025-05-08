@@ -16,5 +16,5 @@ WORKDIR /src
 
 COPY --from=builder src/target/BuscarPersonas-0.0.1-SNAPSHOT.jar BuscarPersonas-0.0.1-SNAPSHOT.jar
 
-EXPOSE 8081
+EXPOSE 8082
 ENTRYPOINT ["java","-jar","BuscarPersonas-0.0.1-SNAPSHOT.jar"]
