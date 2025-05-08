@@ -38,6 +38,17 @@ services:
     depends_on:
       - user-db
 
+  buscarpersonas:
+    build:
+      context: ./BuscarPersonas
+      dockerfile: Dockerfile
+    ports:
+      - "8082:8082"
+    container_name: buscarpersonas
+
+    depends_on:
+      - db
+
   frontend_auth:
     build:
       context: ./frontend

@@ -1,21 +1,44 @@
-<div class="container">
-    <h2 class="mb-4">Buscar Personas</h2>
-  
-    <form (ngSubmit)="buscarPersonas()" class="mb-4 d-flex gap-3 align-items-center">
-      <input type="text" [(ngModel)]="nombre" name="nombre" class="form-control" placeholder="Ingrese nombre">
-      <button type="submit" class="btn btn-primary">Buscar</button>
-    </form>
-  
-    <div *ngIf="personas.length > 0">
-      <h5>Resultados:</h5>
-      <ul class="list-group">
-        <li *ngFor="let persona of personas" class="list-group-item">
-          {{ persona.nombre }} {{ persona.apellido }} - {{ persona.tipo }}
-        </li>
-      </ul>
+<div class="buscar-personas">
+  <h2>Buscar Personas</h2>
+
+  <input
+    type="text"
+    [(ngModel)]="nombre"
+    placeholder="Ingrese nombre"
+    class="form-control"
+  />
+  <button (click)="buscarPersonas()" class="btn btn-primary mt-2">
+    Buscar
+  </button>
+
+  <div *ngIf="busquedasRealizadas">
+    <h3 class="mt-4">Resultados:</h3>
+    <div *ngIf="personas.length > 0; else sinResultados">
+      <table class="table table-bordered mt-2">
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>RUT</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Teléfono</th>
+            <th>Establecimiento</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let persona of personas">
+            <td>{{ persona.tipo }}</td>
+            <td>{{ persona.rut }}</td>
+            <td>{{ persona.nombre }}</td>
+            <td>{{ persona.apellido }}</td>
+            <td>{{ persona.telefono }}</td>
+            <td>{{ persona.establecimiento }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-  
-    <div *ngIf="personas.length === 0 && busquedasRealizadas" class="alert alert-warning">
-      No se encontraron personas con ese nombre.
-    </div>
+    <ng-template #sinResultados>
+      <p class="text-danger">No se encontraron personas con ese nombre.</p>
+    </ng-template>
   </div>
+</div>

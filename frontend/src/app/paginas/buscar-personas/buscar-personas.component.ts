@@ -1,28 +1,32 @@
 import { Component } from '@angular/core';
-import { PersonaService } from '../../servicios/persona.service';
+import { PersonaService, Persona } from '../../servicios/persona.service';
+
 @Component({
   selector: 'app-buscar-personas',
   templateUrl: './buscar-personas.component.html',
-  styleUrl: './buscar-personas.component.css'
+  styleUrls: ['./buscar-personas.component.css']
 })
 export class BuscarPersonasComponent {
   nombre: string = '';
-  personas: any[] = [];
+  personas: Persona[] = [];
   busquedasRealizadas: boolean = false;
 
-  constructor(private personaService: PersonaService) { }
+  constructor(private personaService: PersonaService) {}
 
   buscarPersonas() {
-    this.busquedasRealizadas = true;
-    this.personaService.buscarPorNombre(this.nombre).subscribe({
-      next: (resultado) => {
-        this.personas = resultado;
+    console.log('Buscando nombre:', this.nombre);
+    
+    this.personaService.buscarPorNombre(this.nombre).subscribe(
+      (data) => {
+        console.log('Respuesta backend:', data);
+        this.personas = data.personas;
+        this.busquedasRealizadas = true;
       },
-      error: (err) => {
-        console.error('Error al buscar personas:', err);
-        this.personas = []; // Limpiar la lista si hay un error
+      (error) => {
+        console.error('Error al buscar personas:', error);
+        this.personas = [];
+        this.busquedasRealizadas = true;
       }
-    }
-    )
+    );
   }
 }
