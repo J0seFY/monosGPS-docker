@@ -1,6 +1,9 @@
 services:
   db:
-    image: postgres:latest
+    build:
+      context: ./db-establecimientos
+      dockerfile: Dockerfile
+    container_name: db
     environment:
       POSTGRES_USER: monos
       POSTGRES_PASSWORD: 1234
@@ -9,10 +12,11 @@ services:
       - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
   user-db:
-    image: postgres:latest
+    build:
+      context: ./db-user
+      dockerfile: Dockerfile
     container_name: user-db
     environment:
       POSTGRES_USER: monos
@@ -22,7 +26,6 @@ services:
       - "5433:5433"
     volumes:
       - user-db_data:/var/lib/postgresql/data
-      - ./initUser.sql:/docker-entrypoint-initdb.d/init.sql
 
   auth-service:
     build:
@@ -34,6 +37,13 @@ services:
 
     depends_on:
       - user-db
+  frontend_auth:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80"
+    container_name: frontend_auth
 
 volumes:
   db_data:
