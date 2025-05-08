@@ -1,5 +1,14 @@
 import { Component } from '@angular/core';
+import { UserDTO } from '../register/register.component';
+import { UserService } from '../user.service';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+
+export interface LoginDTO {
+  rut: string;
+  password: string;
+}
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -7,15 +16,25 @@ import { NgForm } from '@angular/forms';
 })
 export class LoginComponent {
   rut: string = '';
-  password: string = '';
+  user: LoginDTO = {
+    rut: '',
+    password: ''
+  };
 
-  onSubmit() {
-    if (this.rut && this.password) {
-      console.log('RUT:', this.rut);
-      console.log('Contraseña:', this.password);
-      // Aquí puedes agregar la lógica para autenticar al usuario
-    } else {
-      alert('Por favor complete todos los campos');
-    }
+  constructor(private userService: UserService, private router: Router) {}
+
+  onLogin() {
+    this.user.rut = this.rut; 
+
+    this.userService.login(this.user).subscribe({
+      next: (res) => {
+        console.log('Inicio de sesión exitoso', res);
+        this.router.navigate(['/inicio']);
+      },
+      error: (err) => {
+        console.error('Error al iniciar sesión', err);
+        alert('RUT o contraseña incorrectos');
+      }
+    });
   }
 }
