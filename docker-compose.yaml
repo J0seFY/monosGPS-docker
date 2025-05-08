@@ -37,14 +37,7 @@ services:
 
     depends_on:
       - user-db
-  frontend_auth:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    ports:
-      - "4200:80"
-    container_name: frontend_auth
-
+      
 volumes:
   db_data:
   user-db_data:

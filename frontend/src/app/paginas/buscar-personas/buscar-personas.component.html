@@ -1,0 +1,21 @@
+<div class="container">
+    <h2 class="mb-4">Buscar Personas</h2>
+  
+    <form (ngSubmit)="buscarPersonas()" class="mb-4 d-flex gap-3 align-items-center">
+      <input type="text" [(ngModel)]="nombre" name="nombre" class="form-control" placeholder="Ingrese nombre">
+      <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+  
+    <div *ngIf="personas.length > 0">
+      <h5>Resultados:</h5>
+      <ul class="list-group">
+        <li *ngFor="let persona of personas" class="list-group-item">
+          {{ persona.nombre }} {{ persona.apellido }} - {{ persona.tipo }}
+        </li>
+      </ul>
+    </div>
+  
+    <div *ngIf="personas.length === 0 && busquedasRealizadas" class="alert alert-warning">
+      No se encontraron personas con ese nombre.
+    </div>
+  </div>
