@@ -10,6 +10,8 @@ spec:
     repoURL: 'https://github.com/J0seFY/monosGPS.git'
     targetRevision: HEAD
     path: k8s
+    directory:
+      recurse: true
 
   destination:
     server: 'https://kubernetes.default.svc'
