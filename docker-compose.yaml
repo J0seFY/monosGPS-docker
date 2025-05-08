@@ -38,13 +38,13 @@ services:
     depends_on:
       - user-db
 
-  auth-frontend:
+  frontend_auth:
     build:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
       - "4200:80"
-    container_name: auth-frontend
+    container_name: frontend_auth
    
 volumes:
   db_data:
