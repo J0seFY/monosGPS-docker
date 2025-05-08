@@ -8,7 +8,7 @@ import { LoginDTO } from './login/login.component';
 })
 export class UserService {
 
-  private apiUrl = 'http://localhost:8081/AuthService'; // URL de tu backend
+  private apiUrl = 'http://authservice:8081/AuthService'; // URL de tu backend
 
   constructor(private http: HttpClient) {}
 
