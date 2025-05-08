@@ -7,13 +7,15 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { InicioComponent } from './auth/inicio/inicio.component';
 import { FormsModule } from '@angular/forms';
+import { BuscarPersonasComponent } from './paginas/buscar-personas/buscar-personas.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    InicioComponent
+    InicioComponent,
+    BuscarPersonasComponent
   ],
   imports: [
     BrowserModule,
