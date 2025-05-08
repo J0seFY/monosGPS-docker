@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: establecimientos-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: establecimientos-db
+  template:
+    metadata:
+      labels:
+        app: establecimientos-db
+    spec:
+      containers:
+        - name: establecimientos-db
+          image: fyjo/monosgps:establecimientos-db
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: monos
+            - name: POSTGRES_PASSWORD
+              value: "1234"
+            - name: POSTGRES_DB
+              value: establecimientos

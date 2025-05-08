@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: buscarpersonas
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: buscarpersonas
+  template:
+    metadata:
+      labels:
+        app: buscarpersonas
+    spec:
+      containers:
+        - name: buscarpersonas
+          image: fyjo/monosgps:buscarpersonas
+          ports:
+            - containerPort: 8082
