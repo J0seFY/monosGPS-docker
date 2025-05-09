@@ -20,11 +20,11 @@ jobs:
       with:
         java-version: '11'  # Puedes especificar la versión de Java que necesitas
         distribution: 'temurin'  # Usando la distribución Temurin
-    - name: Move to AuthService directory
-      run: cd AuthService
-      
+        
     - name: Build with Maven
       run: mvn clean install -DskipTests=true
+      working-directory: AuthService
 
     - name: Run tests
       run: mvn test
+      working-directory: AuthService
