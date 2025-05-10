@@ -3,7 +3,9 @@ name: Build and Push Frontend
 on:
   workflow_dispatch:
   push:
-    branches: [main]
+    branches: 
+      - main
+      - actualizar_imagen_frontend
     paths:
       - 'frontend/**'
 
