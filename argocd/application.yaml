@@ -8,7 +8,7 @@ spec:
 
   source:
     repoURL: 'https://github.com/J0seFY/monosGPS.git'
-    targetRevision: HEAD
+    targetRevision: main
     path: k8s
     directory:
       recurse: true

@@ -16,4 +16,4 @@ spec:
         - name: frontend
           image: fyjo/monosgps:frontend
           ports:
-            - containerPort: 80
+            - containerPort: 81
