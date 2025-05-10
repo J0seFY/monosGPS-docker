@@ -24,10 +24,22 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push Docker image
+      - name: Build and push Docker image with commit SHA
         uses: docker/build-push-action@v5
         with:
           context: ./frontend
           file: ./frontend/Dockerfile
           push: true
-          tags: fyjo/monosgps:frontend
+          tags: fyjo/monosgps:frontend-${{ github.sha }}
+
+      - name: Update frontend deployment manifest
+        run: |
+          sed -i "s|fyjo/monosgps:frontend.*|fyjo/monosgps:frontend-${{ github.sha }}|" k8s/frontend/deployment.yaml
+
+      - name: Commit and push updated manifest
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add k8s/frontend/deployment.yaml
+          git commit -m "Update frontend image to frontend-${{ github.sha }}"
+          git push

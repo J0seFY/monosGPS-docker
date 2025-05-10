@@ -14,6 +14,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: fyjo/monosgps:frontend
+          image: fyjo/monosgps:frontend-
+          imagePullPolicy: Always
           ports:
             - containerPort: 81
