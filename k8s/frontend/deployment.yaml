@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: fyjo/monosgps:frontend-e28eb1a
+          image: fyjo/monosgps:frontend-${{ github.sha }}
           imagePullPolicy: Always
           ports:
             - containerPort: 81
