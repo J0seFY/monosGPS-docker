@@ -8,6 +8,13 @@ import { RegisterComponent } from './auth/register/register.component';
 import { InicioComponent } from './auth/inicio/inicio.component';
 import { FormsModule } from '@angular/forms';
 import { BuscarPersonasComponent } from './paginas/buscar-personas/buscar-personas.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule } from '@angular/material/button';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -22,8 +29,16 @@ import { BuscarPersonasComponent } from './paginas/buscar-personas/buscar-person
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatListModule,
+    MatIconModule,
+    MatButtonModule,
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
