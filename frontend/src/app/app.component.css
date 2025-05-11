@@ -1,6 +1,6 @@
 /* Header */
 header {
-    background-color: #8fb922; /* bg-warning */
+    background-color: #8fb922; 
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -8,12 +8,24 @@ header {
   }
   
   /* Logo */
-  header .header-logo img {
-    width: 130px; /* Ajusta el tamaño del logo según necesites */
+.logo-img {
+    width: 160px !important; /* Ajusta el tamaño del logo según necesites */
     height: auto;
   }
+
+  .sidenav-container {
+    height: 100vh;
+  }
   
-  /* Título estilizado */
+  .sidenav {
+    width: 250px;
+  }
+  
+  .mat-icon {
+    font-size: 28px;
+    color: #212529;
+  }
+  
   header .header-title {
     flex-grow: 1; /* Permite que el título ocupe el espacio disponible */
   }
