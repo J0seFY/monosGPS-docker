@@ -37,7 +37,7 @@ jobs:
 
       - name: Update frontend deployment manifest
         run: |
-          sed -i "s|image: fyjo/monosgps:frontend.*|image: fyjo/monosgps:frontend-${{ github.sha }}|" k8s/frontend/deployment.yaml
+          sed -i "s|image: fyjo/monosgps:frontend-[a-z0-9]\+|image: fyjo/monosgps:frontend-${{ github.sha }}|" k8s/frontend/deployment.yaml
 
       - name: Commit and push updated manifest
         run: |
