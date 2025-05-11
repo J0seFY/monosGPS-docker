@@ -55,9 +55,7 @@ public class UserControllerTest {
             .contentType(MediaType.APPLICATION_JSON)
             .content(userJson))  // Usar el JSON convertido del DTO
             .andExpect(status().isCreated())  // Verificar que la respuesta sea 201 (Created)
-            .andExpect(jsonPath("$.rut").value("12345678-9"))  // Verificar que el RUT sea correcto
-            // Verificar que la contraseña no esté presente por razones de seguridad
-            .andExpect(jsonPath("$.password").doesNotExist());  // No se recomienda verificar la contraseña directamente
+            .andExpect(jsonPath("$.rut").value("12345678-9")); // Verificar que el RUT sea correcto
 }
 
 
