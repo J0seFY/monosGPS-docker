@@ -32,11 +32,12 @@ jobs:
           context: ./frontend
           file: ./frontend/Dockerfile
           push: true
-          tags: fyjo/monosgps:frontend-${{ github.sha }}
+          tags: |
+            fyjo/monosgps:frontend-${{ github.sha }}
 
       - name: Update frontend deployment manifest
         run: |
-          sed -i "s|fyjo/monosgps:frontend.*|fyjo/monosgps:frontend-${{ github.sha }}|" k8s/frontend/deployment.yaml
+          sed -i "s|image: fyjo/monosgps:frontend.*|image: fyjo/monosgps:frontend-${{ github.sha }}|" k8s/frontend/deployment.yaml
 
       - name: Commit and push updated manifest
         run: |
