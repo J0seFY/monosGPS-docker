@@ -1,34 +1,32 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: monosgps-ingress
-  namespace: default
+  name: system-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
-  rules: # También puedes usar la IP de Minikube directamente o modificar /etc/hosts
-      - http:
-          paths:
-            - path: /
-              pathType: ImplementationSpecific
-              backend:
-                service:
-                  name: frontend
-                  port:
-                    number: 80
-
-            - path: /AuthService(/|$)(.*)
-              pathType: ImplementationSpecific
-              backend:
-                service:
-                  name: authservice
-                  port:
-                    number: 8081
-
-            - path: /api/personas(/|$)(.*)
-              pathType: ImplementationSpecific
-              backend:
-                service:
-                  name: buscarpersonas
-                  port:
-                    number: 8082
+  rules:
+  - host: monos.local
+    http:
+      paths:
+      - pathType: Prefix
+        path: /?(.*)
+        backend:
+          service:
+            name: frontend
+            port:
+              number: 80
+      - pathType: Prefix
+        path: /AuthService/(.*)
+        backend:
+          service:
+            name: authservice
+            port:
+              number: 8081
+      - pathType: Prefix
+        path: /api/personas/(.*)
+        backend:
+          service:
+            name: buscarpersonas
+            port:
+              number: 8082
