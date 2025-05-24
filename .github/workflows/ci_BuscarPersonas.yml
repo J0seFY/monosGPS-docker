@@ -30,4 +30,4 @@ jobs:
           context: ./BuscarPersonas
           file: ./BuscarPersonas/Dockerfile
           push: true
-          tags: fyjo/monosgps:buscarpersonas
+          tags: fyjo/monosgps-buscarpersonas:v1.0.0
