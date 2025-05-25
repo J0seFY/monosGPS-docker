@@ -3,7 +3,7 @@ name: Build and Push Frontend
 on:
   workflow_dispatch:
   push:
-    branches: [separar_repositorios]
+    branches: [separar_repositorio]
     paths:
       - 'frontend/**'
 
