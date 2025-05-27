@@ -30,4 +30,4 @@ jobs:
           context: ./AuthService
           file: ./AuthService/Dockerfile
           push: true
-          tags: fyjo/monosgps:authservice
+          tags: fyjo/monosgps-authservice:v1.0.0

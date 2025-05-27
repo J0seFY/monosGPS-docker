@@ -30,4 +30,4 @@ jobs:
           context: ./db-user
           file: ./db-user/Dockerfile
           push: true
-          tags: fyjo/monosgps:usuarios-db
+          tags: fyjo/monosgps-usuarios-db:v1.0.0

@@ -30,4 +30,5 @@ jobs:
           context: ./frontend
           file: ./frontend/Dockerfile
           push: true
-          tags: fyjo/monosgps:frontend
+          tags: fyjo/monosgps-frontend:v1.1.0
+
