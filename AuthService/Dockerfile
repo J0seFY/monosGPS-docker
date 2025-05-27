@@ -8,7 +8,7 @@ WORKDIR /src
 COPY . .
 
 #empaqueta todo el proyecto sin tests
-RUN mvn clean package -DskipTest
+RUN mvn clean package -DskipTests
 
 FROM openjdk:21-jdk-slim
 
