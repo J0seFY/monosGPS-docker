@@ -3,7 +3,7 @@ name: Build and Push AuthService
 on:
   workflow_dispatch:
   push:
-    branches: [separar_repositorios]
+    branches: [main]
     paths:
       - 'AuthService/**'
 
