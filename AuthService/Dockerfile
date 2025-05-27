@@ -7,7 +7,7 @@ WORKDIR /src
 #copia todo el proyecto
 COPY . .
 
-#empaqueta todo el proyecto sin test
+#empaqueta todo el proyecto sin tests
 RUN mvn clean package 
 
 FROM openjdk:21-jdk-slim
