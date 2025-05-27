@@ -44,17 +44,14 @@ public class UserControllerTest {
     userDTO.setRut("12345678-9");
     userDTO.setPassword("password123");
 
-    // Simular el comportamiento del servicio
     when(userService.agregarUser(any(UserDTO.class))).thenReturn(userDTO);
 
-    // Convertir el DTO a JSON
     String userJson = new ObjectMapper().writeValueAsString(userDTO);
 
-    // Realizar la petición POST y verificar la respuesta
     mockMvc.perform(post("/AuthService")
             .contentType(MediaType.APPLICATION_JSON)
-            .content(userJson))  // Usar el JSON convertido del DTO
-            .andExpect(status().isCreated())  // Verificar que la respuesta sea 201 (Created)
+            .content(userJson))  
+            .andExpect(status().isCreated())  
             .andExpect(jsonPath("$.rut").value("12345678-9")); // Verificar que el RUT sea correcto
 }
 
