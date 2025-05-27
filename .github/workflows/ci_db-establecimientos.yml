@@ -30,4 +30,4 @@ jobs:
           context: ./db-establecimientos
           file: ./db-establecimientos/Dockerfile
           push: true
-          tags: fyjo/monosgps:establecimientos-db
+          tags: fyjo/monosgps-establecimientos-db:v1.0.0
