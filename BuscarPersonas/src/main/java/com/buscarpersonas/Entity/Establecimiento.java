@@ -1,9 +1,5 @@
 package com.buscarpersonas.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,4 +24,12 @@ public class Establecimiento {
 
     @OneToMany(mappedBy = "establecimiento", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Profesor> profesores;
+
+    // Constructor vacío (ya lo tienes)
+    public Establecimiento() {}
+
+    // Constructor que acepta nombre (para tests o creación rápida)
+    public Establecimiento(String nombre) {
+        this.nombre = nombre;
+    }
 }
