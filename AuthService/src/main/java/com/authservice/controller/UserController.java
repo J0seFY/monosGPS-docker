@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.regex.Pattern;
 
-@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/AuthService")
 public class UserController {
