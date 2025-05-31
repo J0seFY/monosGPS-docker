@@ -15,7 +15,6 @@ import com.buscarpersonas.service.PersonaService;
 
 @RestController
 @RequestMapping("/api/personas")
-@CrossOrigin(origins = "*") // habilita CORS
 public class PersonaController {
     private final PersonaService personaService;
 
