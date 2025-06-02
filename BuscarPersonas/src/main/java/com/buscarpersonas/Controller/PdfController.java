@@ -28,11 +28,11 @@ public class PdfController {
 
             // Setear los campos que tienes en el PDF
             form.setField("tipo", persona.getTipo());
-            form.setField("text2", persona.getRut());
-            form.setField("text1", persona.getNombre());
+            form.setField("Text2", persona.getRut());
+            form.setField("Text1", persona.getNombre());
             form.setField("apellido", persona.getApellido());
             form.setField("telefono", persona.getTelefono());
-            form.setField("text3", persona.getEstablecimiento());
+            form.setField("Text3", persona.getEstablecimiento());
 
             stamper.setFormFlattening(true); // Para que no se pueda editar después
 
