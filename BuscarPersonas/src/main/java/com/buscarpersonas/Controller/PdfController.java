@@ -25,6 +25,11 @@ public class PdfController {
             reader = new PdfReader(pdfTemplate.getInputStream());
             stamper = new PdfStamper(reader, baos);
             AcroFields form = stamper.getAcroFields();
+            
+            System.out.println("Campos en el PDF:");
+            for (String key : form.getFields().keySet()) {
+                System.out.println(key);
+            }
 
             // Setear los campos que tienes en el PDF
             form.setField("tipo", persona.getTipo());
