@@ -13,7 +13,7 @@ export interface Persona {
 })
 export class PdfService {
 
-  private apiUrl = 'http://localhost:8082/api/pdf/generar';
+  private apiUrl = 'http://monos.local/api/pdf/generar';
 
   constructor(private http: HttpClient) { }
 
