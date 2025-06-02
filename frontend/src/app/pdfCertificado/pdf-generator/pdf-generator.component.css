@@ -1,0 +1,13 @@
+.container-fluid {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+  
+  .btn-primary {
+    background-color: #4e4e40;
+    border: none;
+  }
+  
+  .btn-primary:hover {
+    background-color: #ccc;
+  }

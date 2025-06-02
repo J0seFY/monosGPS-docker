@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatIconModule } from '@angular/material/icon';
+import { PdfGeneratorComponent } from './pdfCertificado/pdf-generator/pdf-generator.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { MatIconModule } from '@angular/material/icon';
     LoginComponent,
     RegisterComponent,
     InicioComponent,
-    BuscarPersonasComponent
+    BuscarPersonasComponent,
+    PdfGeneratorComponent
   ],
   imports: [
     BrowserModule,
