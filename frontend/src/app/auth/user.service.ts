@@ -8,7 +8,7 @@ import { LoginDTO } from './login/login.component';
 })
 export class UserService {
 
-  private apiUrl = 'http://monos.local/AuthService'; // URL de tu backend
+  private apiUrl = '/AuthService'; // URL de tu backend
 
   constructor(private http: HttpClient) {}
 

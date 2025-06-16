@@ -19,7 +19,7 @@ export interface BuscarPersonasResponse {
   providedIn: 'root'
 })
 export class PersonaService {
-  private apiUrl = 'http://monos.local/api/personas'; // Cambia esto a la URL de tu API
+  private apiUrl = '/api/personas'; // Cambia esto a la URL de tu API
   
   constructor(private http: HttpClient) { }
 

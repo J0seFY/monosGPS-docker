@@ -1,62 +1,84 @@
+version: "3.8"
+
+volumes:
+  db_data:
+  user-db_data:
+
+networks:
+  traefik-net:
+    driver: bridge
+
 services:
-  db:
-    build:
-      context: ./db-establecimientos
-      dockerfile: Dockerfile
-    container_name: db
+  traefik:
+    image: traefik:v3.0
+    container_name: traefik
+    restart: unless-stopped
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks:
+      - traefik-net
+
+  establecimientos-db:
+    image: fyjo/monosgps-establecimientos-db:latest
+    container_name: establecimientos-db
     environment:
       POSTGRES_USER: monos
       POSTGRES_PASSWORD: 1234
       POSTGRES_DB: establecimientos
-    ports:
-      - "5432:5432"
     volumes:
       - db_data:/var/lib/postgresql/data
+    networks:
+      - traefik-net
 
   user-db:
-    build:
-      context: ./db-user
-      dockerfile: Dockerfile
+    image: fyjo/monosgps-usuarios-db:latest
     container_name: user-db
     environment:
       POSTGRES_USER: monos
       POSTGRES_PASSWORD: 1234
       POSTGRES_DB: usuarios
-    ports:
-      - "5433:5433"
     volumes:
       - user-db_data:/var/lib/postgresql/data
+    networks:
+      - traefik-net
 
   auth-service:
-    build:
-      context: ./AuthService
-      dockerfile: Dockerfile
-    ports:
-      - "8081:8081"
+    image: fyjo/monosgps-authservice:latest
     container_name: auth-service
-
     depends_on:
       - user-db
+    networks:
+      - traefik-net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.auth.rule=PathPrefix(`/AuthService`)"
+      - "traefik.http.services.auth.loadbalancer.server.port=8081"
 
   buscarpersonas:
-    build:
-      context: ./BuscarPersonas
-      dockerfile: Dockerfile
-    ports:
-      - "8082:8082"
+    image: fyjo/monosgps-buscarpersonas:latest
     container_name: buscarpersonas
-
     depends_on:
-      - db
+      - establecimientos-db
+    networks:
+      - traefik-net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.personas.rule=PathPrefix(`/api`)"
+      - "traefik.http.services.personas.loadbalancer.server.port=8082"
 
-  frontend_auth:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    ports:
-      - "4200:80"
-    container_name: frontend_auth
-   
-volumes:
-  db_data:
-  user-db_data:
+  frontend:
+    image: fyjo/monosgps-frontend:latest
+    container_name: frontend
+    networks:
+      - traefik-net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=PathPrefix(`/`)"
+      - "traefik.http.services.frontend.loadbalancer.server.port=80"
