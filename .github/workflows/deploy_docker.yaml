@@ -1,6 +1,7 @@
 name: Deploy Docker Compose
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - "docker-compose.yml" 
