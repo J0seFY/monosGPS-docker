@@ -18,6 +18,5 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            cd /home/${{ secrets.SERVER_USER }}/proyecto
-            docker-compose pull buscarpersonas
-            docker-compose up -d buscarpersonas
+            bash -lc "cd /home/${{ secrets.SERVER_USER }}/proyecto && docker-compose pull buscarpersonas && docker-compose up -d buscarpersonas"
+
