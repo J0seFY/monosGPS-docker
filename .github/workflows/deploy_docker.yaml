@@ -14,13 +14,13 @@ jobs:
       - name: Checkout código
         uses: actions/checkout@v3
 
-      - name: Copiar docker-compose.yml al servidor
+      - name: Copiar docker-compose.yaml al servidor
         uses: appleboy/scp-action@v0.1.6
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
-          source: "docker-compose.yml"
+          source: "docker-compose.yaml"
           target: "/home/${{ secrets.SERVER_USER }}/proyecto"
 
       - name: Ejecutar docker-compose en el servidor
