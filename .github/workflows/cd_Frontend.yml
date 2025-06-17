@@ -19,5 +19,5 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             cd /home/${{ secrets.SERVER_USER }}/proyecto
-            docker-compose pull frontend
-            docker-compose up -d frontend
+            docker compose pull frontend
+            docker compose up -d frontend
