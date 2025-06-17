@@ -1,0 +1,23 @@
+name: CD Frontend
+
+on:
+  workflow_run:
+    workflows: ["Build and Push Frontend"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy Frontend via SSH
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            cd /ruta/al/proyecto/docker-compose
+            docker-compose pull frontend
+            docker-compose up -d frontend
