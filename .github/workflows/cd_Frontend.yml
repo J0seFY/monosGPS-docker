@@ -1,6 +1,7 @@
 name: CD Frontend
 
 on:
+  workflow_dispatch:
   workflow_run:
     workflows: ["Build and Push Frontend"]
     types:
