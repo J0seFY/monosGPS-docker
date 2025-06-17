@@ -22,6 +22,4 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            cd /home/${{ secrets.SERVER_USER }}/proyecto
-            /usr/bin/docker-compose pull frontend
-            /usr/bin/docker-compose up -d frontend
+            bash -lc "cd /home/${{ secrets.SERVER_USER }}/proyecto && docker-compose pull frontend && docker-compose up -d frontend"
