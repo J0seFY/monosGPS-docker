@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-agregar-persona',
   templateUrl: './agregar-persona.component.html',
-  styleUrl: './agregar-persona.component.css'
+  styleUrls: ['./agregar-persona.component.css']
 })
 export class AgregarPersonaComponent {
   persona: any = {
