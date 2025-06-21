@@ -41,8 +41,9 @@ public class PersonaController {
     }
 
     @PostMapping("/agregar")
-    public ResponseEntity<String> agregarPersona(@RequestBody PersonaDTO personaDTO) {
+    public ResponseEntity<Map<String, String>> agregarPersona(@RequestBody PersonaDTO personaDTO) {
         personaService.agregarPersona(personaDTO);
-        return ResponseEntity.ok("Persona agregada exitosamente");
+        Map<String, String> response = Map.of("mensaje", "Persona agregada exitosamente");
+        return ResponseEntity.ok(response);
     }
 }

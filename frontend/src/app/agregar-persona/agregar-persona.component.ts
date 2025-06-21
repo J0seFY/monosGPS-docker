@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { PersonaService } from '../servicios/persona.service';
 
 @Component({
   selector: 'app-agregar-persona',
@@ -21,10 +22,10 @@ export class AgregarPersonaComponent {
 
   mensaje: string = '';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private personaService: PersonaService) { }
 
   agregarPersona() {
-    this.http.post('http://localhost:81/api/personas/agregar', this.persona).subscribe({
+    this.personaService.agregarPersona(this.persona).subscribe({
       next: () => {
         this.mensaje = 'Persona agregada correctamente.';
         this.persona = {
