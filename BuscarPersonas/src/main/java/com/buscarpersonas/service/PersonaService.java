@@ -99,7 +99,7 @@ public class PersonaService {
     }
 
     public void agregarPersona(PersonaDTO personaDTO) {
-    Establecimiento est = establecimientoRepository.findByNombre(personaDTO.getEstablecimiento()).orElse(null);
+    Establecimiento est = establecimientoRepository.findByNombre(personaDTO.getEstablecimiento());
 
     
     if (personaDTO.getTipo().equalsIgnoreCase("Estudiante")) {

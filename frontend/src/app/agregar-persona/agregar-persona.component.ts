@@ -8,15 +8,15 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AgregarPersonaComponent {
   persona: any = {
-    tipo: 'Estudiante',
+    tipo: '',
     rut: '',
     nombre: '',
     apellido: '',
     telefono: '',
-    fechaNacimiento: '',
     curso: '',
     asignatura: '',
-    establecimientoId: null
+    fechaNacimiento: '',
+    establecimiento: ''
   };
 
   mensaje: string = '';
