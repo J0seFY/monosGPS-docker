@@ -5,5 +5,6 @@ import com.buscarpersonas.Entity.Establecimiento;
 import java.util.Optional;
 
 public interface EstablecimientoRepository extends JpaRepository<Establecimiento, Integer> {
-    Optional<Establecimiento> findByNombre(String nombre);
+
+    Establecimiento findByNombre(String nombre);
 }

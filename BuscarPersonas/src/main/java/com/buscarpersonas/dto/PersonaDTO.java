@@ -12,9 +12,7 @@ public class PersonaDTO {
     private String establecimiento;
     private String curso;
     private String asignatura;
-    private Integer establecimientoId;
     private LocalDate fechaNacimiento;
-
 
     public PersonaDTO() {
     }
@@ -93,19 +91,11 @@ public class PersonaDTO {
         this.asignatura = asignatura;
     }
 
-    public Integer getEstablecimientoId() {
-        return establecimientoId;
-    }
-
-    public void setEstablecimientoId(Integer establecimientoId) {
-        this.establecimientoId = establecimientoId;
-    }
-
     public LocalDate getFechaNacimiento() {
-    return fechaNacimiento;
-}
+        return fechaNacimiento;
+    }
 
-public void setFechaNacimiento(LocalDate fechaNacimiento) {
-    this.fechaNacimiento = fechaNacimiento;
-}
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
 }
