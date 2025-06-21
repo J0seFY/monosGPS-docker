@@ -21,22 +21,22 @@ export class AgregarPersonaComponent {
 
   mensaje: string = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   agregarPersona() {
-    this.http.post('http://localhost:8082/api/personas/agregar', this.persona).subscribe({
+    this.http.post('http://localhost:81/api/personas/agregar', this.persona).subscribe({
       next: () => {
         this.mensaje = 'Persona agregada correctamente.';
         this.persona = {
-          tipo: 'Estudiante',
+          tipo: '',
           rut: '',
           nombre: '',
           apellido: '',
           telefono: '',
-          fechaNacimiento: '',
           curso: '',
           asignatura: '',
-          establecimientoId: null
+          fechaNacimiento: '',
+          establecimiento: ''
         };
       },
       error: (err) => {
