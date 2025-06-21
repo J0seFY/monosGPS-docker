@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.buscarpersonas.dto.PersonaDTO;
 import com.buscarpersonas.service.PersonaService;
@@ -36,5 +38,11 @@ public class PersonaController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @PostMapping("/agregar")
+    public ResponseEntity<String> agregarPersona(@RequestBody PersonaDTO personaDTO) {
+        personaService.agregarPersona(personaDTO);
+        return ResponseEntity.ok("Persona agregada exitosamente");
     }
 }
