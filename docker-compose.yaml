@@ -87,9 +87,9 @@ services:
     image: prom/prometheus
     container_name: prometheusMonos
     volumes:
-      - ./Monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./monitoring/prometheus.yaml:/etc/prometheus/prometheus.yml
     command:
-      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--config.file=/etc/prometheus/prometheus.yaml"
     ports:
       - "9091:9091"
     networks:
@@ -102,7 +102,7 @@ services:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=admin
     volumes:
-      - ./Monitoring/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
+      - ./monitoring/datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yml
     ports:
       - "82:3000"
     networks:
