@@ -17,10 +17,8 @@ services:
       - "--api.insecure=true"
       - "--providers.docker=true"
       - "--entrypoints.web.address=:80"
-      - "--metrics.prometheus=true"  
     ports:
       - "81:80"
-      - "8081:8080"  
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
@@ -59,7 +57,6 @@ services:
       - traefik-net
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.auth.entrypoints=web"
       - "traefik.http.routers.auth.rule=PathPrefix(`/AuthService`)"
       - "traefik.http.services.auth.loadbalancer.server.port=8081"
 
@@ -72,7 +69,6 @@ services:
       - traefik-net
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.auth.entrypoints=web"
       - "traefik.http.routers.personas.rule=PathPrefix(`/api`)"
       - "traefik.http.services.personas.loadbalancer.server.port=8082"
 
@@ -83,36 +79,9 @@ services:
       - traefik-net
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.auth.entrypoints=web"
       - "traefik.http.routers.frontend.rule=PathPrefix(`/`)"
       - "traefik.http.services.frontend.loadbalancer.server.port=80"
 
-  prometheus:
-    image: prom/prometheus
-    container_name: prometheusMonos
-    volumes:
-      - ./prometheus.yaml:/etc/prometheus/prometheus.yml
-      - ./Monitoring/alerts.rules:/etc/prometheus/alerts.rules
-    command:
-      - "--config.file=/etc/prometheus/prometheus.yml"
-    ports:
-      - "9091:9091"
-    networks:
-      - traefik-net
 
-  grafana:
-    image: grafana/grafana
-    container_name: grafanaMonos
-    environment:
-      - GF_SECURITY_ADMIN_USER=admin
-      - GF_SECURITY_ADMIN_PASSWORD=admin
-    volumes:
-      - ./Monitoring/datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yml
-      - ./Monitoring/dashboards:/var/lib/grafana/dashboards
-      - ./Monitoring/dashboard-provisioning.yaml:/etc/grafana/provisioning/dashboards/all.yaml
-    ports:
-      - "82:3000"
-    networks:
-      - traefik-net
 
     
