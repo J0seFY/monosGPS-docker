@@ -39,7 +39,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           source: "Monitoring/prometheus.yml"
-          target: "/home/${{ secrets.SERVER_USER }}/proyecto/monitoring"     
+          target: "/home/${{ secrets.SERVER_USER }}/proyecto/Monitoring"     
 
       - name: Ejecutar docker-compose en el servidor
         uses: appleboy/ssh-action@v0.1.6
