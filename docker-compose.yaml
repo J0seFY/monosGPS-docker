@@ -102,9 +102,10 @@ services:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=admin
     volumes:
-      - ./monitoring/grafana:/etc/grafana/provisioning
+      - ./monitoring/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
     ports:
       - "82:3000"
     networks:
       - traefik-net
+
     
