@@ -1,0 +1,36 @@
+{
+    "title": "Basic Go Metrics",
+    "panels": [
+      {
+        "type": "singlestat",
+        "title": "Go Goroutines",
+        "targets": [
+          {
+            "expr": "go_goroutines",
+            "instant": true
+          }
+        ]
+      },
+      {
+        "type": "graph",
+        "title": "Memory Usage",
+        "targets": [
+          {
+            "expr": "go_memstats_alloc_bytes",
+            "range": true
+          }
+        ]
+      },
+      {
+        "type": "table",
+        "title": "GC Duration",
+        "targets": [
+          {
+            "expr": "go_gc_duration_seconds",
+            "instant": true
+          }
+        ]
+      }
+    ],
+    "schemaVersion": 36
+  }
