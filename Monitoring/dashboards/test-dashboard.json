@@ -1,0 +1,17 @@
+{
+    "title": "Test Dashboard",
+    "panels": [
+      {
+        "type": "singlestat",
+        "title": "UP",
+        "targets": [
+          {
+            "expr": "up",
+            "instant": true,
+            "range": false
+          }
+        ]
+      }
+    ],
+    "schemaVersion": 36
+  }
