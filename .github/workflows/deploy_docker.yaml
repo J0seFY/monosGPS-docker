@@ -43,6 +43,17 @@ jobs:
           source: "Monitoring/prometheus.yaml"
           target: "/home/${{ secrets.SERVER_USER }}/proyecto"
 
+      - name: Listar archivos en /proyecto para debug
+        uses: appleboy/ssh-action@v0.1.6
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            echo "Contenido de /home/${{ secrets.SERVER_USER }}/proyecto:"
+            ls -la /home/${{ secrets.SERVER_USER }}/proyecto
+
+
       - name: Verificar que prometheus.yaml existe en servidor
         uses: appleboy/ssh-action@v0.1.6
         with:
