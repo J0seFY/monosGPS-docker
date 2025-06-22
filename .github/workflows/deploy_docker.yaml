@@ -5,8 +5,6 @@ on:
   push:
     paths:
       - "docker-compose.yaml"
-      - "Monitoring/**"
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -24,42 +22,6 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           source: "docker-compose.yaml"
           target: "/home/${{ secrets.SERVER_USER }}/proyecto"
-
-      - name: Copiar carpeta Monitoring al servidor
-        uses: appleboy/scp-action@v0.1.6
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          source: "Monitoring"
-          target: "/home/${{ secrets.SERVER_USER }}/proyecto"
-    
-      - name: Listar contenido de proyecto para debug
-        uses: appleboy/ssh-action@v0.1.6
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          script: |
-            echo "Contenido de /home/${{ secrets.SERVER_USER }}/proyecto:"
-            ls -l /home/${{ secrets.SERVER_USER }}/proyecto
-            echo "Contenido de /home/${{ secrets.SERVER_USER }}/proyecto/Monitoring:"
-            ls -l /home/${{ secrets.SERVER_USER }}/proyecto/Monitoring
-
-
-      - name: Verificar que prometheus.yaml existe en servidor
-        uses: appleboy/ssh-action@v0.1.6
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          script: |
-            if [ -f /home/${{ secrets.SERVER_USER }}/proyecto/prometheus.yaml ]; then
-              echo "prometheus.yaml es un archivo válido"
-            else
-              echo "Error: prometheus.yaml no es un archivo o no existe"
-              exit 1
-            fi
 
       # Levantar contenedores en el servidor
       - name: Ejecutar docker-compose en el servidor
