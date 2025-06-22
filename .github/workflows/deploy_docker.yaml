@@ -25,25 +25,16 @@ jobs:
           source: "docker-compose.yaml"
           target: "/home/${{ secrets.SERVER_USER }}/proyecto"
 
-      - name: Limpiar prometheus.yaml previo si existe en proyecto
-        uses: appleboy/ssh-action@v0.1.6
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          script: |
-            rm -f /home/${{ secrets.SERVER_USER }}/proyecto/prometheus.yaml
-
-      - name: Copiar prometheus.yaml al servidor (directo en proyecto)
+      - name: Copiar carpeta Monitoring al servidor
         uses: appleboy/scp-action@v0.1.6
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
-          source: "Monitoring/prometheus.yaml"
+          source: "Monitoring"
           target: "/home/${{ secrets.SERVER_USER }}/proyecto"
-
-      - name: Listar archivos en /proyecto para debug
+    
+      - name: Listar contenido de proyecto para debug
         uses: appleboy/ssh-action@v0.1.6
         with:
           host: ${{ secrets.SERVER_HOST }}
@@ -51,7 +42,9 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
             echo "Contenido de /home/${{ secrets.SERVER_USER }}/proyecto:"
-            ls -la /home/${{ secrets.SERVER_USER }}/proyecto
+            ls -l /home/${{ secrets.SERVER_USER }}/proyecto
+            echo "Contenido de /home/${{ secrets.SERVER_USER }}/proyecto/Monitoring:"
+            ls -l /home/${{ secrets.SERVER_USER }}/proyecto/Monitoring
 
 
       - name: Verificar que prometheus.yaml existe en servidor
