@@ -22,7 +22,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           source: "docker-compose.yaml"
-          target: "/home/${{ secrets.SERVER_USER }}/proyecto"
+          target: "/home/${{ secrets.SERVER_USER }}/proyecto"   
 
       - name: Crear directorio monitoring en el servidor si no existe
         uses: appleboy/ssh-action@v0.1.6
