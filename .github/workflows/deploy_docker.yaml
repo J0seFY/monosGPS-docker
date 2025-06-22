@@ -5,7 +5,7 @@ on:
   push:
     paths:
       - "docker-compose.yaml"
-      - "Monitoring/**"
+      - "Monitoring/prometheus.yaml"
 
 jobs:
   deploy:
@@ -15,17 +15,6 @@ jobs:
       - name: Checkout código
         uses: actions/checkout@v3
 
-      # Verifica que el archivo existe localmente en el repo
-      - name: Verificar archivo prometheus.yaml localmente
-        run: |
-          if [ -f Monitoring/prometheus.yaml ]; then
-            echo "prometheus.yaml encontrado localmente"
-          else
-            echo "Error: Monitoring/prometheus.yaml no existe"
-            exit 1
-          fi
-
-      # Copiar docker-compose.yaml al servidor
       - name: Copiar docker-compose.yaml al servidor
         uses: appleboy/scp-action@v0.1.6
         with:
@@ -35,9 +24,8 @@ jobs:
           source: "docker-compose.yaml"
           target: "/home/${{ secrets.SERVER_USER }}/proyecto"
 
-      # Crear carpeta Monitoring si no existe
-      - name: Crear carpeta Monitoring en el servidor
-        uses: appleboy/ssh-action@v0.1.6
+      - name: Crear directorio Monitoring en el servidor si no existe
+        uses: appleboy/ssh-action@0.1.6
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
@@ -45,20 +33,16 @@ jobs:
           script: |
             mkdir -p /home/${{ secrets.SERVER_USER }}/proyecto/Monitoring
 
-      # Eliminar carpeta prometheus.yaml si existe
-      - name: Eliminar carpeta prometheus.yaml si fue creada por error
+      - name: Limpiar archivo o carpeta conflictiva prometheus.yaml en servidor
         uses: appleboy/ssh-action@v0.1.6
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            if [ -d "/home/${{ secrets.SERVER_USER }}/proyecto/Monitoring/prometheus.yaml" ]; then
-              echo "🧹 Eliminando carpeta conflictiva prometheus.yaml"
-              rm -r "/home/${{ secrets.SERVER_USER }}/proyecto/Monitoring/prometheus.yaml"
-            fi
+            rm -rf /home/${{ secrets.SERVER_USER }}/proyecto/Monitoring/prometheus.yaml
+            mkdir -p /home/${{ secrets.SERVER_USER }}/proyecto/Monitoring
 
-      # Copiar prometheus.yaml al servidor (ruta corregida)
       - name: Copiar prometheus.yaml al servidor
         uses: appleboy/scp-action@v0.1.6
         with:
@@ -68,22 +52,29 @@ jobs:
           source: "Monitoring/prometheus.yaml"
           target: "/home/${{ secrets.SERVER_USER }}/proyecto/Monitoring"
 
-      # Verificar que prometheus.yaml en el servidor sea un archivo
-      - name: Verificar que prometheus.yaml es un archivo
+      - name: Verificar que prometheus.yaml existe en servidor
         uses: appleboy/ssh-action@v0.1.6
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            if [ -f "/home/${{ secrets.SERVER_USER }}/proyecto/Monitoring/prometheus.yaml" ]; then
+            if [ -f /home/${{ secrets.SERVER_USER }}/proyecto/Monitoring/prometheus.yaml ]; then
               echo "prometheus.yaml es un archivo válido"
             else
               echo "Error: prometheus.yaml no es un archivo o no existe"
               exit 1
             fi
 
-      # Levantar contenedores en el servidor
+      - name: Copiar demás archivos de Monitoring al servidor
+        uses: appleboy/scp-action@v0.1.6
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          source: "Monitoring/alerts.rules"
+          target: "/home/${{ secrets.SERVER_USER }}/proyecto/Monitoring"
+
       - name: Ejecutar docker-compose en el servidor
         uses: appleboy/ssh-action@v0.1.6
         with:
