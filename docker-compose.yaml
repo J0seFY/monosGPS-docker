@@ -91,7 +91,7 @@ services:
     image: prom/prometheus
     container_name: prometheusMonos
     volumes:
-      - ./Monitoring/prometheus.yaml:/etc/prometheus/prometheus.yml
+      - ./prometheus.yaml:/etc/prometheus/prometheus.yml
       - ./Monitoring/alerts.rules:/etc/prometheus/alerts.rules
     command:
       - "--config.file=/etc/prometheus/prometheus.yml"
