@@ -19,9 +19,9 @@ jobs:
       - name: Verificar archivo prometheus.yaml localmente
         run: |
           if [ -f Monitoring/prometheus.yaml ]; then
-            echo "✅ prometheus.yaml encontrado localmente"
+            echo "prometheus.yaml encontrado localmente"
           else
-            echo "❌ Error: Monitoring/prometheus.yaml no existe"
+            echo "Error: Monitoring/prometheus.yaml no existe"
             exit 1
           fi
 
