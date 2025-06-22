@@ -8,7 +8,10 @@ export interface Persona {
   nombre: string;
   apellido: string;
   telefono: string;
-  establecimiento: string;
+  curso?: string;
+  asignatura?: string;
+  fechaNacimiento?: string;
+  establecimiento?: string;
 }
 
 export interface BuscarPersonasResponse {
@@ -25,5 +28,11 @@ export class PersonaService {
 
   buscarPorNombre(nombre: string): Observable<BuscarPersonasResponse> {
     return this.http.get<BuscarPersonasResponse>(`${this.apiUrl}/buscar/${nombre}`);
+  }
+
+  agregarPersona(persona: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/agregar`, persona, {
+      responseType: 'text'  // <- Muy importante para evitar error al parsear texto plano
+    });
   }
 }

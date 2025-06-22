@@ -16,6 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MatIconModule } from '@angular/material/icon';
 import { PdfGeneratorComponent } from './pdfCertificado/pdf-generator/pdf-generator.component';
+import { AgregarPersonaComponent } from './agregar-persona/agregar-persona.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { PdfGeneratorComponent } from './pdfCertificado/pdf-generator/pdf-genera
     RegisterComponent,
     InicioComponent,
     BuscarPersonasComponent,
-    PdfGeneratorComponent
+    PdfGeneratorComponent,
+    AgregarPersonaComponent
   ],
   imports: [
     BrowserModule,
