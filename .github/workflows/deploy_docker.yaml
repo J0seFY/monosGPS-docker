@@ -5,7 +5,7 @@ on:
   push:
     paths:
       - "docker-compose.yaml" 
-      - "monitoring/prometheus.yaml"
+      - "Monitoring/prometheus.yaml"  # <-- Corregido con mayúscula
               
 jobs:
   deploy:
@@ -14,6 +14,13 @@ jobs:
     steps:
       - name: Checkout código
         uses: actions/checkout@v3
+
+      - name: Verificar archivos en el runner (debug)
+        run: |
+          echo "Archivos en el directorio raíz:"
+          ls -al
+          echo "Archivos en la carpeta Monitoring:"
+          ls -al Monitoring
 
       - name: Copiar docker-compose.yaml al servidor
         uses: appleboy/scp-action@v0.1.6
@@ -24,23 +31,23 @@ jobs:
           source: "docker-compose.yaml"
           target: "/home/${{ secrets.SERVER_USER }}/proyecto"   
 
-      - name: Crear directorio monitoring en el servidor si no existe
+      - name: Crear directorio Monitoring en el servidor si no existe
         uses: appleboy/ssh-action@v0.1.6
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            mkdir -p /home/${{ secrets.SERVER_USER }}/proyecto/monitoring
+            mkdir -p /home/${{ secrets.SERVER_USER }}/proyecto/Monitoring
   
-      - name: Copiar prometheus.yml al servidor
+      - name: Copiar prometheus.yaml al servidor
         uses: appleboy/scp-action@v0.1.6
         with:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
-          source: "monitoring/prometheus.yaml"
-          target: "/home/${{ secrets.SERVER_USER }}/proyecto/monitoring"     
+          source: "Monitoring/prometheus.yaml"  # <-- Corregido con mayúscula
+          target: "/home/${{ secrets.SERVER_USER }}/proyecto/Monitoring"     
 
       - name: Ejecutar docker-compose en el servidor
         uses: appleboy/ssh-action@v0.1.6
