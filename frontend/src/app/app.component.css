@@ -1,5 +1,5 @@
 header {
-    background-color: #7022b9; 
+    background-color: #7022b9 !important; 
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -132,7 +132,7 @@ footer {
   
   footer .footer-links a {
     font-size: 0.875rem;
-    color: #212529; /* text-dark */
+    color: #212529; 
     margin: 0 0.5rem;
     transition: color 0.3s ease;
   }
