@@ -13,7 +13,6 @@ networks:
 services:
   traefik:
     image: traefik:v3.0
-    container_name: traefik
     restart: unless-stopped
     command:
       - "--api.insecure=true"
