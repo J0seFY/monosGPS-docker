@@ -3,7 +3,7 @@ global:
   evaluation_interval: 15s
 
 scrape_configs:
-  - job_name: 'prometheus'
+  - job_name: 'prometheus-monos'
     static_configs:
       - targets: ['localhost:9090']
 
@@ -21,6 +21,6 @@ scrape_configs:
     static_configs:
       - targets: ['buscarpersonas:8082']
 
-  - job_name: 'grafana'
+  - job_name: 'grafana-monos'
     static_configs:
-      - targets: ['grafanaMonos:3000']
+      - targets: ['grafana-monos:3000']
