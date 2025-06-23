@@ -3,6 +3,8 @@ version: "3.8"
 volumes:
   db_data:
   user-db_data:
+  prometheus_data:
+  grafana_data:
 
 networks:
   traefik-net:
@@ -19,6 +21,7 @@ services:
       - "--entrypoints.web.address=:80"
     ports:
       - "81:80"
+      - "8080:8080"  # Dashboard Traefik accesible desde Prometheus
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
@@ -82,6 +85,29 @@ services:
       - "traefik.http.routers.frontend.rule=PathPrefix(`/`)"
       - "traefik.http.services.frontend.loadbalancer.server.port=80"
 
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yaml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    ports:
+      - "9090:9090"
+    networks:
+      - traefik-net
 
-
-    
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafanaMonos
+    depends_on:
+      - prometheus
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml
+    ports:
+      - "82:3000"   # Grafana expuesto en puerto 82 del servidor
+    networks:
+      - traefik-net
