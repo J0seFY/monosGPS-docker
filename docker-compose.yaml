@@ -105,7 +105,7 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=admin
     volumes:
       - grafana_data:/var/lib/grafana
-      - ./datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml
+      - ./Monitoring/datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml
     ports:
       - "82:3000"  # Interno 3000, externo 82
     networks:
