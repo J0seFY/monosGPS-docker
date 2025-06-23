@@ -21,7 +21,6 @@ services:
       - "--entrypoints.web.address=:80"
     ports:
       - "81:80"
-      - "8080:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
@@ -89,7 +88,7 @@ services:
     image: prom/prometheus:latest
     container_name: prometheus-monos
     volumes:
-      - ./prometheus.yaml:/etc/prometheus/prometheus.yml
+      - ./Monitoring/prometheus.yaml:/etc/prometheus/prometheus.yml
       - prometheus_data:/prometheus
     ports:
       - "9091:9090" # Interno 9090, externo 9091
