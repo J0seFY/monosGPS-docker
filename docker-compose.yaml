@@ -19,8 +19,13 @@ services:
       - "--api.insecure=true"
       - "--providers.docker=true"
       - "--entrypoints.web.address=:80"
+      - "--metrics.prometheus=true"
+      - "--metrics.prometheus.addEntryPointsLabels=true"
+      - "--metrics.prometheus.addServicesLabels=true"
+      - "--metrics.prometheus.addEntryPoint=metrics"
     ports:
       - "81:80"
+      - "8082:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
