@@ -106,6 +106,9 @@ services:
     volumes:
       - grafana_data:/var/lib/grafana
       - ./Monitoring/datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml
+      - ./Monitoring/dashboard-provisioning.yaml:/etc/grafana/provisioning/dashboards/dashboard-provisioning.yaml
+      - ./Monitoring/dashboards:/etc/grafana/provisioning/dashboards
+
     ports:
       - "82:3000"  # Interno 3000, externo 82
     networks:
