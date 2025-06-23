@@ -16,13 +16,9 @@ services:
     container_name: traefik
     restart: unless-stopped
     command:
-      command:
       - "--api.insecure=true"
       - "--providers.docker=true"
       - "--entrypoints.web.address=:80"
-      - "--entrypoints.metrics.address=:8082"
-      - "--metrics.prometheus.entrypoint=metrics"
-
     ports:
       - "81:80"
     volumes:
