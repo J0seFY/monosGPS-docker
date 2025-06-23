@@ -66,7 +66,7 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            if [ -f /home/${{ secrets.SERVER_USER }}/proyecto/prometheus.yaml ]; then
+            if [ -f /home/${{ secrets.SERVER_USER }}/proyecto/Monitoring/prometheus.yaml ]; then
               echo "prometheus.yaml es un archivo válido"
             else
               echo "Error: prometheus.yaml no es un archivo o no existe"
