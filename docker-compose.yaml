@@ -94,10 +94,12 @@ services:
     volumes:
       - ./Monitoring/prometheus.yaml:/etc/prometheus/prometheus.yml
       - prometheus_data:/prometheus
-    ports:
-      - "9091:9090" # Interno 9090, externo 9091
     networks:
       - traefik-net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.prometheus.rule=PathPrefix(`/prometheus`)"
+      - "traefik.http.services.prometheus.loadbalancer.server.port=9090"
 
   grafana-monos:
     image: grafana/grafana:latest
