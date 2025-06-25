@@ -23,8 +23,7 @@ services:
       - "--metrics.prometheus.addServicesLabels=true"
 
     ports:
-      - "81:80"
-      - "8082:8080"
+      - "8000:80"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
@@ -94,12 +93,10 @@ services:
     volumes:
       - ./Monitoring/prometheus.yaml:/etc/prometheus/prometheus.yml
       - prometheus_data:/prometheus
+    ports:
+      - "8002:9090" # Interno 9090, externo 8002
     networks:
       - traefik-net
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.prometheus.rule=PathPrefix(`/prometheus`)"
-      - "traefik.http.services.prometheus.loadbalancer.server.port=9090"
 
   grafana-monos:
     image: grafana/grafana:latest
@@ -116,6 +113,6 @@ services:
       - ./Monitoring/dashboards:/etc/grafana/provisioning/dashboards
 
     ports:
-      - "82:3000"  # Interno 3000, externo 82
+      - "8001:3000"  # Interno 3000, externo 8001
     networks:
       - traefik-net
