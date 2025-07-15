@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { PersonaService } from '../servicios/persona.service';
+import { PersonaService } from '../../servicios/persona.service';
 
 @Component({
   selector: 'app-agregar-persona',

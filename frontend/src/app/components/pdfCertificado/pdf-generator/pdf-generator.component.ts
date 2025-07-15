@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { PdfService, Persona } from '../../servicios/pdf.service';
-
+import { Persona } from '../../../servicios/persona.service';
+import { PdfService } from '../../../servicios/pdf.service';
+import { PersonaService } from '../../../servicios/persona.service';
+import { NgModel } from '@angular/forms';
 @Component({
   selector: 'app-pdf-generator',
   templateUrl: './pdf-generator.component.html',
@@ -8,9 +10,12 @@ import { PdfService, Persona } from '../../servicios/pdf.service';
 })
 export class PdfGeneratorComponent {
 
-  persona: Persona = {
+  persona : Persona = {
+    tipo: '',
     rut: '',
     nombre: '',
+    apellido: '',
+    telefono: '',
     establecimiento: ''
   };
 
