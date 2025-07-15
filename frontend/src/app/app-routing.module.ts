@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RegisterComponent } from './auth/register/register.component';
-import { LoginComponent } from './auth/login/login.component';
-import { InicioComponent } from './auth/inicio/inicio.component';
-import { BuscarPersonasComponent } from './paginas/buscar-personas/buscar-personas.component';
-import { PdfGeneratorComponent } from './pdfCertificado/pdf-generator/pdf-generator.component';
-
+import { RegisterComponent } from './components/auth/register/register.component';
+import { LoginComponent } from './components/auth/login/login.component';
+import { InicioComponent } from './components/inicio/inicio.component';
+import { BuscarPersonasComponent } from './components/buscar-personas/buscar-personas.component';
+import { PdfGeneratorComponent } from './components/pdfCertificado/pdf-generator/pdf-generator.component';
 const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
   {path:'inicio', component: InicioComponent},

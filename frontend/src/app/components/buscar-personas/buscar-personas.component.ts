@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { PersonaService, Persona } from '../../servicios/persona.service';
-
+import { AgregarPersonaComponent } from '../agregar-persona/agregar-persona.component';
 @Component({
   selector: 'app-buscar-personas',
   templateUrl: './buscar-personas.component.html',

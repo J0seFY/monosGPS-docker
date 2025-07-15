@@ -1,0 +1,16 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrl: './header.component.css'
+})
+export class HeaderComponent {
+
+  mostrarSidebar = false;
+
+  toggleSidebar() {
+    this.mostrarSidebar = !this.mostrarSidebar;
+  }
+
+}

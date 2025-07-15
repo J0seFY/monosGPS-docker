@@ -1,69 +1,7 @@
-<mat-sidenav-container class="sidenav-container">
-  <!-- Sidebar -->
-  <mat-sidenav #sidenav mode="over" class="sidenav" (keydown.escape)="sidenav.close()">
-    <mat-nav-list>
-      <a mat-list-item routerLink="/">Inicio</a>
-      <a mat-list-item routerLink="/login">Iniciar Sesión</a>
-      <a mat-list-item routerLink="/register">Registrarse</a>
-      <a mat-list-item routerLink="/buscarPersonas">Buscar Persona</a>
-      <a mat-list-item routerLink="/CertificadoAlumno">Generar Certificado Alumno</a>
-      <!-- Agrega más enlaces aquí -->
-    </mat-nav-list>
-  </mat-sidenav>
 
-  <!-- Contenido principal -->
-  <mat-sidenav-content>
+<app-header></app-header>
 
-    <!-- Header -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
-    <header class="bg-warning d-flex justify-content-between align-items-center p-3">
-      <div class="d-flex align-items-center">
-        <button mat-icon-button (click)="sidenav.toggle()" class="me-3">
-          <mat-icon>menu</mat-icon>
-        </button>
-        <a routerLink="/" class="d-inline-block">
-          <img src="logo.png" alt="Logo" class="logo-img">
-        </a>
-      </div>
-      <div class="header-title"></div>
-      <nav>
-        <a routerLink="/login" class="btn btn-dark">Iniciar Sesión</a>
-        <a routerLink="/register" class="btn btn-dark">Registrarse</a>
-      </nav>
-    </header>
+<router-outlet></router-outlet>
 
-  
-    <main class="py-5 px-3 min-vh-75">
-      <router-outlet></router-outlet>
-    </main>
 
-    <!-- Footer -->
-    <footer class="bg-light p-3 d-flex flex-column align-items-center">
-      <div class="footer-logo mb-2">
-        <img src="logo.png" alt="Logo" class="logo-img">
-      </div>
-
-      <div class="footer-contact mb-2">
-        <p><strong>Contacto:</strong></p>
-        <p>Teléfono: +123 456 789</p>
-        <p>Correo: contacto.com</p>
-      </div>
-
-      <div class="footer-social-icons mb-2">
-        <a href="#" class="social-icon"><img src="facebook.png"></a>
-        <a href="#" class="social-icon"><img src="instagram.png"></a>
-        <a href="#" class="social-icon"><img src="social.png"></a>
-      </div>
-
-      <div class="footer-links text-center">
-        <p><a href="#" class="text-dark text-decoration-none">Términos y Condiciones</a> |
-          <a href="#" class="text-dark text-decoration-none">Política de Privacidad</a></p>
-      </div>
-
-      <div class="footer-copy text-center mt-2">
-        <p>&copy; 2025 GESTOR COMUNAL DE ESTABLECIMIENTOS. Todos los derechos reservados.</p>
-      </div>
-    </footer>
-
-  </mat-sidenav-content>
-</mat-sidenav-container>
+<app-footer></app-footer>
