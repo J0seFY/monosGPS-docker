@@ -18,5 +18,5 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            bash -lc "cd /home/${{ secrets.SERVER_USER }}/proyecto && docker-compose pull materialesService && docker-compose up -d materialesService"
+            bash -lc "cd /home/${{ secrets.SERVER_USER }}/proyecto && docker-compose pull materiales-service && docker-compose up -d materiales-service"
       
