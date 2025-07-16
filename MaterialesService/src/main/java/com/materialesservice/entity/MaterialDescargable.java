@@ -36,7 +36,7 @@ public class MaterialDescargable {
     @Column(name = "nivel_educativo", nullable = false)
     private NivelEducativo nivelEducativo;
 
-    @NotBlank(message = "El curso es obligatorio")
+    @NotNull(message = "El curso es obligatorio")
     @Enumerated(EnumType.STRING)
     @Column(name = "curso", nullable = false)
     private Curso curso;

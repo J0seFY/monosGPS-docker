@@ -17,7 +17,7 @@ public class MaterialDescargableDTO {
     @NotNull(message = "El nivel educativo es obligatorio")
     private NivelEducativo nivelEducativo;
 
-    @NotBlank(message = "El curso es obligatorio")
+    @NotNull(message = "El curso es obligatorio")
     private Curso curso;
 
     // Constructores
