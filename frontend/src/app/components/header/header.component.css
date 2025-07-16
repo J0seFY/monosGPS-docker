@@ -1,0 +1,81 @@
+header {
+    background-color: #131212 !important; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+  }
+  
+.logo-img {
+    width: 190px !important; 
+    height: auto;
+  }
+
+  .sidenav-container {
+    height: 100vh;
+  }
+  
+  .sidenav {
+    width: 250px;
+  }
+  
+  .mat-icon {
+    font-size: 28px;
+    color: #212529;
+  }
+  
+  header .header-title {
+    flex-grow: 1; 
+  }
+  
+  header .header-title .title-text {
+    font-family: 'Poppins', sans-serif; 
+    font-size: 2rem; 
+    font-weight: 700;
+    color: #1058a0; 
+    letter-spacing: 2px; 
+    text-transform: uppercase; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); 
+    transition: color 0.3s ease, text-shadow 0.3s ease; 
+  }
+  
+  header .header-title .title-text:hover {
+    color: #d82c90; 
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3); 
+  }
+  
+  header nav a {
+    margin-left: 1rem;
+    text-decoration: none;
+    font-weight: bold;
+    color: #186cc0; 
+    transition: color 0.3s ease;
+  }
+  
+  header nav a:hover {
+    color: #2660b1; 
+  }
+  
+  header nav .btn {
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    background-color: #343a40;
+    border: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  header nav .btn:hover {
+    background-color: #23272b; 
+  }
+  
+  .icon-button-custom mat-icon {
+    color: white; /* Cambia aquí por el color que quieras */
+  }
+  
+  .icon-button-custom:hover mat-icon {
+    color: #ffffff; /* Ejemplo de color al pasar el mouse */
+  }
+  

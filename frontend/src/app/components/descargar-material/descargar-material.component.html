@@ -1,0 +1,28 @@
+<div class="descarga-material-container">
+    <h1>Descarga de Material Educativo</h1>
+  
+    <div class="filtros">
+      <label for="nivel">Nivel:</label>
+      <select id="nivel" [(ngModel)]="nivelSeleccionado" (change)="onNivelChange()">
+        <option *ngFor="let nivel of niveles" [value]="nivel">{{ nivel }}</option>
+      </select>
+  
+      <label for="curso">Curso:</label>
+      <select id="curso" [(ngModel)]="cursoSeleccionado" (change)="filtrarMaterial()">
+        <option *ngFor="let curso of cursosDisponibles" [value]="curso">{{ curso }}</option>
+      </select>
+    </div>
+  
+    <div *ngIf="materialFiltrado.length > 0; else sinMaterial">
+      <ul class="lista-material">
+        <li *ngFor="let material of materialFiltrado">
+          <a [href]="material.url" download>{{ material.nombre }}</a>
+        </li>
+      </ul>
+    </div>
+  
+    <ng-template #sinMaterial>
+      <p>No hay material disponible para el nivel y curso seleccionado.</p>
+    </ng-template>
+  </div>
+  

@@ -1,0 +1,47 @@
+<p></p>
+<div class="container">
+  <form class="mx-auto" style="max-width: 500px;" (ngSubmit)="onRegister()">
+    <div class="row mb-3">
+      <div class="col">
+        <input type="text" class="form-control" placeholder="Nombre"
+               [(ngModel)]="user.nombres" name="nombres" required />
+      </div>
+      <div class="col">
+        <input type="text" class="form-control" placeholder="Apellido"
+               [(ngModel)]="user.apellido1" name="apellido1" required />
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <input type="text" class="form-control" placeholder="RUT"
+             [(ngModel)]="user.rut" name="rut" required />
+    </div>
+
+    <div class="mb-3">
+      <input type="email" class="form-control" placeholder="Correo Electrónico"
+             [(ngModel)]="user.email" name="email" required />
+    </div>
+
+    <div class="mb-3">
+      <input type="text" class="form-control" placeholder="Establecimiento"
+             [(ngModel)]="user.establecimiento" name="establecimiento" required />
+    </div>
+
+    <div class="row mb-3">
+      <div class="col">
+        <input type="password" class="form-control" placeholder="Contraseña"
+               [(ngModel)]="user.password" name="password" required />
+      </div>
+      <div class="col">
+        <input type="password" class="form-control" placeholder="Confirmar contraseña"
+               [(ngModel)]="confirmPassword" name="confirmPassword" required />
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-dark w-100"
+            [disabled]="user.password !== confirmPassword">
+      Registrarse
+    </button>
+  </form>
+</div>
+<p></p>
