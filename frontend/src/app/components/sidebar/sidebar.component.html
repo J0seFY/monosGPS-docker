@@ -10,6 +10,21 @@
           <mat-icon> search</mat-icon>
           <span> Buscar Personas</span>
         </a>
+
+        <a mat-list-item routerLink="/generarReportes" (click)="sidenavOpen = false">
+          <mat-icon> search</mat-icon>
+          <span> Generar reportes</span>
+        </a>
+
+        <a mat-list-item routerLink="/descargarMaterial" (click)="sidenavOpen = false">
+          <mat-icon> description</mat-icon>
+          <span> Descargar material </span>
+        </a>
+
+        <a mat-list-item routerLink="/subirMaterial" (click)="sidenavOpen = false">
+          <mat-icon> description</mat-icon>
+          <span> Subir material</span>
+        </a>
       </mat-nav-list>
     </mat-sidenav>
   
