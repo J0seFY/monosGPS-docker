@@ -1,0 +1,55 @@
+<div class="buscar-personas-wrapper">
+  <div class="card shadow-sm p-4 bg-white rounded">
+
+    <h2 class="text-center mb-4">Buscar Personas</h2>
+
+    <!-- Campo de búsqueda -->
+    <input
+      type="text"
+      [(ngModel)]="nombre"
+      placeholder="Ingrese nombre"
+      class="form-control mb-3"
+    />
+
+    <!-- Botón buscar -->
+    <button (click)="buscarPersonas()" class="btn btn-secondary w-100 mb-4">Buscar</button>
+
+    <!-- Resultados -->
+    <div *ngIf="busquedasRealizadas">
+      <h3 class="mt-4 mb-3">Resultados:</h3>
+      <div *ngIf="personas.length > 0; else sinResultados">
+        <table class="table table-bordered table-hover align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>Tipo</th>
+              <th>RUT</th>
+              <th>Nombre</th>
+              <th>Apellido</th>
+              <th>Teléfono</th>
+              <th>Establecimiento</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let persona of personas">
+              <td>{{ persona.tipo }}</td>
+              <td>{{ persona.rut }}</td>
+              <td>{{ persona.nombre }}</td>
+              <td>{{ persona.apellido }}</td>
+              <td>{{ persona.telefono }}</td>
+              <td>{{ persona.establecimiento }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Mensaje sin resultados -->
+      <ng-template #sinResultados>
+        <p class="text-danger text-center">No se encontraron personas con ese nombre.</p>
+      </ng-template>
+    </div>
+
+    <!-- Componente hijo: Agregar Persona -->
+    <app-agregar-persona></app-agregar-persona>
+
+  </div>
+</div>

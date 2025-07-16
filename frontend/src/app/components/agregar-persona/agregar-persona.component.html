@@ -1,0 +1,78 @@
+<div class="form-wrapper">
+  <div class="card shadow-sm p-4 mb-4 bg-white rounded">
+
+    <h3 class="text-center mb-4">Agregar Persona</h3>
+
+    <form (ngSubmit)="agregarPersona()" #miFormulario="ngForm">
+
+      <!-- Campo Tipo -->
+      <div class="form-group mb-3">
+        <label>Tipo</label>
+        <select [(ngModel)]="persona.tipo" name="tipo" class="form-control" required>
+          <option value="Estudiante">Estudiante</option>
+          <option value="Profesor">Profesor</option>
+        </select>
+      </div>
+
+      <!-- RUT -->
+      <div class="form-group mb-3">
+        <label>RUT</label>
+        <input type="text" [(ngModel)]="persona.rut" name="rut" class="form-control" required />
+      </div>
+
+      <!-- Nombre -->
+      <div class="form-group mb-3">
+        <label>Nombre</label>
+        <input type="text" [(ngModel)]="persona.nombre" name="nombre" class="form-control" required />
+      </div>
+
+      <!-- Apellido -->
+      <div class="form-group mb-3">
+        <label>Apellido</label>
+        <input type="text" [(ngModel)]="persona.apellido" name="apellido" class="form-control" required />
+      </div>
+
+      <!-- Teléfono -->
+      <div class="form-group mb-3">
+        <label>Teléfono</label>
+        <input type="text" [(ngModel)]="persona.telefono" name="telefono" class="form-control" />
+      </div>
+
+      <!-- Fecha de nacimiento -->
+      <div class="form-group mb-3">
+        <label>Fecha de nacimiento</label>
+        <input type="date" [(ngModel)]="persona.fechaNacimiento" name="fechaNacimiento" class="form-control" />
+      </div>
+
+      <!-- Curso -->
+      <div class="form-group mb-3">
+        <label>Curso (si es estudiante)</label>
+        <input type="text" [(ngModel)]="persona.curso" name="curso" class="form-control" />
+      </div>
+
+      <!-- Asignatura -->
+      <div class="form-group mb-3">
+        <label>Asignatura (si es profesor)</label>
+        <input type="text" [(ngModel)]="persona.asignatura" name="asignatura" class="form-control" />
+      </div>
+
+      <!-- Establecimiento -->
+      <div class="form-group mb-3">
+        <label>Nombre del Establecimiento</label>
+        <input type="text" [(ngModel)]="persona.establecimiento" name="establecimiento" class="form-control" required />
+      </div>
+
+      <!-- Botón -->
+      <button type="submit" [disabled]="!miFormulario.form.valid" class="btn btn-secondary w-100 mt-3">
+        Agregar
+      </button>
+
+    </form>
+
+    <!-- Mensaje de confirmación -->
+    <div *ngIf="mensaje" class="mt-3 alert alert-info text-center">
+      {{ mensaje }}
+    </div>
+
+  </div>
+</div>

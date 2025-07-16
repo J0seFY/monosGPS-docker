@@ -1,0 +1,36 @@
+.offcanvas {
+    width: 250px;
+  }
+  
+  .offcanvas-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(104, 60, 60, 0.5);
+    z-index: 1040;
+  }
+
+  .hamburger-icon {
+    color: #fff !important;
+    font-size: 1.5rem;
+  }
+  
+  .custom-toolbar {
+    background-color: transparent !important;
+    color: black; 
+  }
+
+.custom-toolbar .mat-mdc-icon-button {
+    background-color: transparent !important;
+    border-radius: 0 !important; 
+  }
+  
+  .custom-toolbar .mat-mdc-icon-button:hover {
+    background-color: rgba(0, 0, 0, 0.05) !important;
+  }
+
+  .custom-toolbar .mat-mdc-icon {
+    color: black !important;
+  }
