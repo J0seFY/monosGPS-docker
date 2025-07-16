@@ -1,5 +1,5 @@
 header {
-    background-color: #ef0505 !important; 
+    background-color: #131212 !important; 
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -69,5 +69,13 @@ header {
   
   header nav .btn:hover {
     background-color: #23272b; 
+  }
+  
+  .icon-button-custom mat-icon {
+    color: white; /* Cambia aquí por el color que quieras */
+  }
+  
+  .icon-button-custom:hover mat-icon {
+    color: #ffffff; /* Ejemplo de color al pasar el mouse */
   }
   

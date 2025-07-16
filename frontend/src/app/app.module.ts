@@ -22,6 +22,9 @@ import { FooterComponent } from './components/footer/footer.component';
 import { CarruselComponent } from './components/carrusel/carrusel.component';
 import { CommonModule } from '@angular/common';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { GenerarReportesComponent } from './components/generar-reportes/generar-reportes.component';
+import { DescargarMaterialComponent } from './components/descargar-material/descargar-material.component';
+import { SubirMaterialComponent } from './components/subir-material/subir-material.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +39,9 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     AgregarPersonaComponent,
     PdfGeneratorComponent,
     SidebarComponent,
+    GenerarReportesComponent,
+    DescargarMaterialComponent,
+    SubirMaterialComponent,
   ],
   imports: [
     BrowserModule,
