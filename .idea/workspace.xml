@@ -5,13 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69fdedb7-caf4-4817-bcca-8706df5849c2" name="Changes" comment="configuracion kubernetes y argoCD">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/monosGPS.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MaterialesService/Dockerfile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MaterialesService/src/main/java/com/materialesservice/Config/FileConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MaterialesService/src/main/java/com/materialesservice/Controller/MaterialDescargableController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MaterialesService/src/main/java/com/materialesservice/Repository/MaterialDescargableRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MaterialesService/src/main/java/com/materialesservice/Service/MaterialDescargableService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MaterialesService/src/main/java/com/materialesservice/entity/MaterialDescargable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MaterialesService/src/main/java/com/materialesservice/entity/MaterialDescargableDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MaterialesService/src/main/java/com/materialesservice/enumeraciones/Curso.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MaterialesService/src/main/java/com/materialesservice/enumeraciones/NivelEducativo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +31,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="workflow" />
+        <option value="Enum" />
+        <option value="Dockerfile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -41,7 +53,7 @@
 }</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/J0seFY/monosGPS.git&quot;,
+    &quot;url&quot;: &quot;https://github.com/J0seFY/monosGPS-docker.git&quot;,
     &quot;accountId&quot;: &quot;cdf8915b-906f-477b-a8ee-7ec83e1d0aa2&quot;
   }
 }</component>
@@ -68,12 +80,13 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.springboot.executor": "Run",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "material-service",
     "ignore.virus.scanning.warn.message": "true",
-    "jdk.selected.JAVA_MODULE": "21",
+    "jdk.selected.JAVA_MODULE": "openjdk-22",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/José Fuentes/Documents/SO/monosGPS",
+    "last_opened_file_path": "C:/Users/José Fuentes/Documents/monosGPS-docker-1",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -147,6 +160,14 @@
     <configuration name="BuscarPersonasApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="BuscarPersonas" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.buscarpersonas.BuscarPersonasApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MaterialesServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="MaterialesService" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.materialesservice.MaterialesServiceApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -286,6 +307,8 @@
       <workItem from="1746886291375" duration="95000" />
       <workItem from="1746886390196" duration="21000" />
       <workItem from="1747015333431" duration="11000" />
+      <workItem from="1752693192592" duration="357000" />
+      <workItem from="1752693631891" duration="7551000" />
     </task>
     <task id="LOCAL-00001" summary="implementacion AuthService para registro y login de usuarios y creacion de docker compose">
       <option name="closed" value="true" />
@@ -420,6 +443,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="implementacion AuthService para registro y login de usuarios y creacion de docker compose" />

@@ -3,6 +3,8 @@ version: "3.8"
 volumes:
   db_data:
   user-db_data:
+  materiales_data:
+  materiales_file:
   prometheus_data:
   grafana_data:
 
@@ -28,6 +30,19 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     networks:
       - traefik-net
+
+  materiales-db:
+    image: postgres:15
+    container_name: materiales-db
+    environment:
+      POSTGRES_DB: materiales
+      POSTGRES_USER: monos
+      POSTGRES_PASSWORD: 1234
+    volumes:
+      - materiales_data:/var/lib/postgresql/data
+    networks:
+      - traefik-net
+    restart: unless-stopped
 
   establecimientos-db:
     image: fyjo/monosgps-establecimientos-db:latest
@@ -64,6 +79,27 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.auth.rule=PathPrefix(`/AuthService`)"
       - "traefik.http.services.auth.loadbalancer.server.port=8081"
+
+  materiales-service:
+    image: fyjo/monosgps-materialesService:latest
+    container_name: materiales-service
+    depends_on:
+      - materiales-db
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/material_db
+      - SPRING_DATASOURCE_USERNAME=monos
+      - SPRING_DATASOURCE_PASSWORD=1234
+      - FILE_UPLOAD_PATH=/app/uploads
+    volumes:
+      - materiales_file:/app/uploads
+    networks:
+      - traefik-net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.auth.rule=PathPrefix(`/materiales`)"
+      - "traefik.http.services.auth.loadbalancer.server.port=8083"
+
 
   buscarpersonas:
     image: fyjo/monosgps-buscarpersonas:latest

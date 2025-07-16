@@ -1,11 +1,11 @@
 package com.materialesservice.entity;
 
+import com.materialesservice.enumeraciones.Curso;
+import com.materialesservice.enumeraciones.NivelEducativo;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -37,46 +37,26 @@ public class MaterialDescargable {
     private NivelEducativo nivelEducativo;
 
     @NotBlank(message = "El curso es obligatorio")
-    @Size(max = 50, message = "El curso no puede exceder 50 caracteres")
+    @Enumerated(EnumType.STRING)
     @Column(name = "curso", nullable = false)
-    private String curso;
-
-    @Column(name = "tipo_archivo")
-    private String tipoArchivo;
+    private Curso curso;
 
     @Column(name = "tamaño_archivo")
     private Long tamañoArchivo;
-
-    @Size(max = 500, message = "La descripción no puede exceder 500 caracteres")
-    @Column(name = "descripcion")
-    private String descripcion;
-
-    @Column(name = "activo", nullable = false)
-    private Boolean activo = true;
-
-    @CreationTimestamp
-    @Column(name = "fecha_creacion", nullable = false, updatable = false)
-    private LocalDateTime fechaCreacion;
-
-    @UpdateTimestamp
-    @Column(name = "fecha_actualizacion", nullable = false)
-    private LocalDateTime fechaActualizacion;
 
     // Constructores
     public MaterialDescargable() {}
 
     public MaterialDescargable(String nombreArchivo, String nombreOriginal, String rutaArchivo,
-                               NivelEducativo nivelEducativo, String curso, String tipoArchivo,
-                               Long tamañoArchivo, String descripcion) {
+                               NivelEducativo nivelEducativo, Curso curso) {
         this.nombreArchivo = nombreArchivo;
         this.nombreOriginal = nombreOriginal;
         this.rutaArchivo = rutaArchivo;
         this.nivelEducativo = nivelEducativo;
         this.curso = curso;
-        this.tipoArchivo = tipoArchivo;
-        this.tamañoArchivo = tamañoArchivo;
-        this.descripcion = descripcion;
     }
+
+
 
     // Getters y Setters
     public Long getId() { return id; }
@@ -94,24 +74,7 @@ public class MaterialDescargable {
     public NivelEducativo getNivelEducativo() { return nivelEducativo; }
     public void setNivelEducativo(NivelEducativo nivelEducativo) { this.nivelEducativo = nivelEducativo; }
 
-    public String getCurso() { return curso; }
-    public void setCurso(String curso) { this.curso = curso; }
+    public @NotBlank(message = "El curso es obligatorio") Curso getCurso() { return curso; }
+    public void setCurso(String curso) { this.curso = Curso.valueOf(curso); }
 
-    public String getTipoArchivo() { return tipoArchivo; }
-    public void setTipoArchivo(String tipoArchivo) { this.tipoArchivo = tipoArchivo; }
-
-    public Long getTamañoArchivo() { return tamañoArchivo; }
-    public void setTamañoArchivo(Long tamañoArchivo) { this.tamañoArchivo = tamañoArchivo; }
-
-    public String getDescripcion() { return descripcion; }
-    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
-
-    public Boolean getActivo() { return activo; }
-    public void setActivo(Boolean activo) { this.activo = activo; }
-
-    public LocalDateTime getFechaCreacion() { return fechaCreacion; }
-    public void setFechaCreacion(LocalDateTime fechaCreacion) { this.fechaCreacion = fechaCreacion; }
-
-    public LocalDateTime getFechaActualizacion() { return fechaActualizacion; }
-    public void setFechaActualizacion(LocalDateTime fechaActualizacion) { this.fechaActualizacion = fechaActualizacion; }
 }
