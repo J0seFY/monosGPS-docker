@@ -48,4 +48,4 @@ jobs:
           context: ./materialesService
           file: ./materialesService/Dockerfile
           push: true
-          tags: fyjo/monosgps-materialesService:latest
+          tags: fyjo/monosgps-materialesservice:latest
