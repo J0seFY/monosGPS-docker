@@ -1,0 +1,58 @@
+.descarga-material-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .descarga-material-container h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .filtros {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .filtros label {
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .filtros select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .lista-material {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .lista-material li {
+    margin-bottom: 10px;
+  }
+  
+  .lista-material a {
+    text-decoration: none;
+    color: #0a66c2;
+    background-color: #f0f4f8;
+    padding: 10px;
+    display: block;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .lista-material a:hover {
+    background-color: #d9e6f2;
+  }
+  
+  p {
+    color: #777;
+  }
+  

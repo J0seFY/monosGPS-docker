@@ -1,0 +1,27 @@
+<div class="subir-material-container">
+    <h1>Subir Material Educativo</h1>
+  
+    <form (ngSubmit)="subirMaterial()" #materialForm="ngForm">
+  
+      <label for="nivel">Nivel:</label>
+      <select id="nivel" required [(ngModel)]="nivelSeleccionado" name="nivel" (change)="onNivelChange()">
+        <option *ngFor="let nivel of niveles" [value]="nivel">{{ nivel }}</option>
+      </select>
+  
+      <label for="curso">Curso:</label>
+      <select id="curso" required [(ngModel)]="cursoSeleccionado" name="curso">
+        <option *ngFor="let curso of cursosDisponibles" [value]="curso">{{ curso }}</option>
+      </select>
+  
+      <label for="archivo">Archivo PDF:</label>
+      <input type="file" id="archivo" required (change)="onArchivoSeleccionado($event)" accept="application/pdf">
+  
+      <button type="submit" [disabled]="!archivoSeleccionado || !nivelSeleccionado || !cursoSeleccionado">
+        Subir Material
+      </button>
+  
+    </form>
+  
+    <p *ngIf="mensaje">{{ mensaje }}</p>
+  </div>
+  
