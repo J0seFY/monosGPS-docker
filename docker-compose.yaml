@@ -87,7 +87,7 @@ services:
       - materiales-db
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/material_db
+      - SPRING_DATASOURCE_URL=jdbc:jdbc:postgresql://materiales-db:5432/materiales
       - SPRING_DATASOURCE_USERNAME=monos
       - SPRING_DATASOURCE_PASSWORD=1234
       - FILE_UPLOAD_PATH=/app/uploads
