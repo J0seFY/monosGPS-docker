@@ -81,7 +81,7 @@ services:
       - "traefik.http.services.auth.loadbalancer.server.port=8081"
 
   materiales-service:
-    image: fyjo/monosgps-materialesService:latest
+    image: fyjo/monosgps-materialesservice:latest
     container_name: materiales-service
     depends_on:
       - materiales-db
