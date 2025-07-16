@@ -12,6 +12,7 @@ export class SubirMaterialComponent {
 
   nivelSeleccionado = '';
   cursoSeleccionado = '';
+  nombreArchivo = '';
 
   archivoSeleccionado: File | null = null;
   mensaje = '';
@@ -47,15 +48,24 @@ export class SubirMaterialComponent {
       formData.append('archivo', this.archivoSeleccionado);
       formData.append('nivel', this.nivelSeleccionado);
       formData.append('curso', this.cursoSeleccionado);
+      formData.append('nombreOriginal', this.nombreArchivo.trim());
 
       this.http.post('http://localhost:3000/api/materiales', formData).subscribe({
         next: () => {
           this.mensaje = 'Material subido correctamente.';
+          this.limpiarFormulario();
         },
         error: () => {
           this.mensaje = 'Error al subir el material.';
         },
       });
     }
+  }
+
+  limpiarFormulario() {
+    this.nivelSeleccionado = '';
+    this.cursoSeleccionado = '';
+    this.nombreArchivo = '';
+    this.archivoSeleccionado = null;
   }
 }
