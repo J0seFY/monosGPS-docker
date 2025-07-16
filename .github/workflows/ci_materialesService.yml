@@ -5,7 +5,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'materialesService/**'
+      - 'MaterialesService/**'
 
 jobs:
   build-and-push:
@@ -41,7 +41,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          context: ./materialesService
-          file: ./materialesService/Dockerfile
+          context: ./MaterialesService
+          file: ./MaterialesService/Dockerfile
           push: true
           tags: fyjo/monosgps-materialesservice:latest
