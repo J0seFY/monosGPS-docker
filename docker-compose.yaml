@@ -91,8 +91,8 @@ services:
       - traefik-net
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.auth.rule=PathPrefix(`/materiales`)"
-      - "traefik.http.services.auth.loadbalancer.server.port=8083"
+      - "traefik.http.routers.materiales.rule=PathPrefix(`/materiales`)"
+      - "traefik.http.services.materiales.loadbalancer.server.port=8083"
 
 
   buscarpersonas:
