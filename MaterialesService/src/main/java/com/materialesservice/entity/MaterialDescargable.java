@@ -74,7 +74,7 @@ public class MaterialDescargable {
     public NivelEducativo getNivelEducativo() { return nivelEducativo; }
     public void setNivelEducativo(NivelEducativo nivelEducativo) { this.nivelEducativo = nivelEducativo; }
 
-    public @NotBlank(message = "El curso es obligatorio") Curso getCurso() { return curso; }
+    public @NotNull(message = "El curso es obligatorio") Curso getCurso() { return curso; }
     public void setCurso(String curso) { this.curso = Curso.valueOf(curso); }
 
 }
