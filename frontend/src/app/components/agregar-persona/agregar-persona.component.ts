@@ -18,7 +18,7 @@ export class AgregarPersonaComponent {
     curso: '',
     asignatura: '',
     fechaNacimiento: '',
-    establecimiento: ''
+    establecimiento: null
   };
 
   mensaje: string = '';
@@ -36,7 +36,7 @@ export class AgregarPersonaComponent {
 
   agregarPersona() {
     this.persona.establecimiento = Number(this.persona.establecimiento);
-    
+
     this.personaService.agregarPersona(this.persona).subscribe({
       next: () => {
         this.mensaje = 'Persona agregada correctamente.';
@@ -50,7 +50,7 @@ export class AgregarPersonaComponent {
           curso: '',
           asignatura: '',
           fechaNacimiento: '',
-          establecimiento: '',
+          establecimiento: null,
         };
       },
       error: (err) => {
