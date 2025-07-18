@@ -1,0 +1,422 @@
+Index: MensajesService/src/main/java/com/mensajesservice/Entity/Establecimiento.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/MensajesService/src/main/java/com/mensajesservice/Entity/Establecimiento.java b/MensajesService/src/main/java/com/mensajesservice/Entity/Establecimiento.java
+new file mode 100644
+--- /dev/null	(date 1752869463475)
++++ b/MensajesService/src/main/java/com/mensajesservice/Entity/Establecimiento.java	(date 1752869463475)
+@@ -0,0 +1,83 @@
++package com.mensajesservice.Entity;
++
++import jakarta.persistence.*;
++import lombok.Getter;
++import lombok.Setter;
++
++import java.util.List;
++
++@Entity
++@Getter
++@Setter
++public class Establecimiento {
++
++    @Id
++    @GeneratedValue(strategy = GenerationType.IDENTITY)
++    private Long id;
++
++    private String nombre;
++    private String direccion;
++    private String telefono;
++
++    @Column(nullable = false, length = 100)
++    private String comuna;
++
++    @OneToMany(mappedBy = "establecimiento", cascade = CascadeType.ALL, orphanRemoval = true)
++    private List<Estudiante> estudiantes;
++
++    @OneToMany(mappedBy = "establecimiento", cascade = CascadeType.ALL, orphanRemoval = true)
++    private List<Profesor> profesores;
++
++    // Constructor vacío (ya lo tienes)
++    public Establecimiento() {
++    }
++
++    // Constructor que acepta nombre (para tests o creación rápida)
++    public Establecimiento(String nombre) {
++        this.nombre = nombre;
++    }
++
++    // Constructor que acepta todos los campos (opcional, útil para pruebas o carga
++    // inicial)
++    public Establecimiento(String nombre, String direccion, String comuna, String telefono) {
++        this.nombre = nombre;
++        this.direccion = direccion;
++        this.comuna = comuna;
++        this.telefono = telefono;
++    }
++
++    // Getters y Setters
++
++    public Long getId() {
++        return id;
++    }
++
++    public void setId(Long id) {
++        this.id = id;
++    }
++
++    public String getNombre() {
++        return nombre;
++    }
++
++    public void setNombre(String nombre) {
++        this.nombre = nombre;
++    }
++
++    public String getDireccion() {
++        return direccion;
++    }
++
++    public void setDireccion(String direccion) {
++        this.direccion = direccion;
++    }
++
++    public String getTelefono() {
++        return telefono;
++    }
++
++    public void setTelefono(String telefono) {
++        this.telefono = telefono;
++    }
++}
++
+Index: .idea/encodings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"Encoding\">\r\n    <file url=\"file://$PROJECT_DIR$/MaterialesService/src/main/java\" charset=\"UTF-8\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/encodings.xml b/.idea/encodings.xml
+--- a/.idea/encodings.xml	(revision 133e619cd3daa87ea48a45a77afd69dedccb8b80)
++++ b/.idea/encodings.xml	(date 1752862539023)
+@@ -1,6 +1,8 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="Encoding">
++    <file url="file://$PROJECT_DIR$/MaterialesService/MensajesService/src/main/java" charset="UTF-8" />
+     <file url="file://$PROJECT_DIR$/MaterialesService/src/main/java" charset="UTF-8" />
++    <file url="file://$PROJECT_DIR$/MensajesService/src/main/java" charset="UTF-8" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: .idea/compiler.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"CompilerConfiguration\">\r\n    <annotationProcessing>\r\n      <profile name=\"Annotation profile for MaterialesService\" enabled=\"true\">\r\n        <sourceOutputDir name=\"target/generated-sources/annotations\" />\r\n        <sourceTestOutputDir name=\"target/generated-test-sources/test-annotations\" />\r\n        <outputRelativeToContentRoot value=\"true\" />\r\n        <processorPath useClasspath=\"false\">\r\n          <entry name=\"$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar\" />\r\n        </processorPath>\r\n        <module name=\"MaterialesService\" />\r\n      </profile>\r\n    </annotationProcessing>\r\n  </component>\r\n  <component name=\"JavacSettings\">\r\n    <option name=\"ADDITIONAL_OPTIONS_OVERRIDE\">\r\n      <module name=\"MaterialesService\" options=\"-parameters\" />\r\n    </option>\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+--- a/.idea/compiler.xml	(revision 133e619cd3daa87ea48a45a77afd69dedccb8b80)
++++ b/.idea/compiler.xml	(date 1752862539010)
+@@ -7,15 +7,24 @@
+         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+         <outputRelativeToContentRoot value="true" />
+         <processorPath useClasspath="false">
+-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
++          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.38/lombok-1.18.38.jar" />
++          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.5.5.Final/mapstruct-processor-1.5.5.Final.jar" />
++          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.5.5.Final/mapstruct-1.5.5.Final.jar" />
+         </processorPath>
+         <module name="MaterialesService" />
+       </profile>
++      <profile name="Maven default annotation processors profile" enabled="true">
++        <sourceOutputDir name="target/generated-sources/annotations" />
++        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
++        <outputRelativeToContentRoot value="true" />
++        <module name="MensajesService" />
++      </profile>
+     </annotationProcessing>
+   </component>
+   <component name="JavacSettings">
+     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+       <module name="MaterialesService" options="-parameters" />
++      <module name="MensajesService" options="-parameters" />
+     </option>
+   </component>
+ </project>
+\ No newline at end of file
+Index: MensajesService/src/main/java/com/mensajesservice/Entity/Profesor.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/MensajesService/src/main/java/com/mensajesservice/Entity/Profesor.java b/MensajesService/src/main/java/com/mensajesservice/Entity/Profesor.java
+new file mode 100644
+--- /dev/null	(date 1752869508666)
++++ b/MensajesService/src/main/java/com/mensajesservice/Entity/Profesor.java	(date 1752869508666)
+@@ -0,0 +1,29 @@
++package com.mensajesservice.Entity;
++
++import jakarta.persistence.Entity;
++import jakarta.persistence.Id;
++import jakarta.persistence.JoinColumn;
++import jakarta.persistence.ManyToOne;
++
++import jakarta.persistence.*;
++import lombok.Getter;
++import lombok.Setter;
++
++@Entity
++@Getter
++@Setter
++public class Profesor {
++
++    @Id
++    private String rut;
++
++    private String nombre;
++    private String apellido;
++    private String telefono;
++    private String asignatura;
++
++    @ManyToOne
++    @JoinColumn(name = "establecimiento_id")
++    private Establecimiento establecimiento;
++}
++
+Index: MensajesService/src/main/java/com/mensajesservice/Entity/Estudiante.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/MensajesService/src/main/java/com/mensajesservice/Entity/Estudiante.java b/MensajesService/src/main/java/com/mensajesservice/Entity/Estudiante.java
+new file mode 100644
+--- /dev/null	(date 1752869494373)
++++ b/MensajesService/src/main/java/com/mensajesservice/Entity/Estudiante.java	(date 1752869494373)
+@@ -0,0 +1,44 @@
++package com.mensajesservice.Entity;
++
++import jakarta.persistence.*;
++import lombok.Getter;
++import lombok.Setter;
++
++import java.time.LocalDate;
++
++@Entity
++@Table(name = "estudiante") // ← útil para asegurar nombre de tabla
++@Getter
++@Setter
++public class Estudiante {
++
++    @Id
++    @Column(length = 20)
++    private String rut;
++
++    @Column(nullable = false)
++    private String nombre;
++
++    @Column(nullable = false)
++    private String apellido;
++
++    @Column(length = 50)
++    private String telefono;
++
++    @Column(length = 100)
++    private String curso;
++
++    @Column(name = "fecha_nacimiento", nullable = false)
++    private LocalDate fechaNacimiento;
++
++    @Column(length = 100)
++    private String nacionalidad;
++
++    @Column(length = 50)
++    private String estado;
++
++    @ManyToOne(fetch = FetchType.LAZY)
++    @JoinColumn(name = "establecimiento_id", referencedColumnName = "id")
++    private Establecimiento establecimiento; // ← relación correctamente declarada
++}
++
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ExternalStorageConfigurationManager\" enabled=\"true\" />\r\n  <component name=\"MavenProjectsManager\">\r\n    <option name=\"originalFiles\">\r\n      <list>\r\n        <option value=\"$PROJECT_DIR$/MaterialService/pom.xml\" />\r\n        <option value=\"$PROJECT_DIR$/MaterialesService/pom.xml\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_22\" project-jdk-name=\"openjdk-22\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision 133e619cd3daa87ea48a45a77afd69dedccb8b80)
++++ b/.idea/misc.xml	(date 1752862528348)
+@@ -6,7 +6,14 @@
+       <list>
+         <option value="$PROJECT_DIR$/MaterialService/pom.xml" />
+         <option value="$PROJECT_DIR$/MaterialesService/pom.xml" />
++        <option value="$PROJECT_DIR$/MaterialesService/MensajesService/pom.xml" />
++        <option value="$PROJECT_DIR$/MensajesService/pom.xml" />
+       </list>
++    </option>
++    <option name="ignoredFiles">
++      <set>
++        <option value="$PROJECT_DIR$/MaterialesService/MensajesService/pom.xml" />
++      </set>
+     </option>
+   </component>
+   <component name="ProjectRootManager" version="2" languageLevel="JDK_22" project-jdk-name="openjdk-22" project-jdk-type="JavaSDK">
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"69fdedb7-caf4-4817-bcca-8706df5849c2\" name=\"Changes\" comment=\"configuracion kubernetes y argoCD\">\r\n      <change afterPath=\"$PROJECT_DIR$/.idea/compiler.xml\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/.idea/encodings.xml\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/.idea/jarRepositories.xml\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/.idea/vcs.xml\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/MaterialesService/Dockerfile\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/MaterialesService/src/main/java/com/materialesservice/Config/FileConfig.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/MaterialesService/src/main/java/com/materialesservice/Controller/MaterialDescargableController.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/MaterialesService/src/main/java/com/materialesservice/Repository/MaterialDescargableRepository.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/MaterialesService/src/main/java/com/materialesservice/Service/MaterialDescargableService.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/MaterialesService/src/main/java/com/materialesservice/entity/MaterialDescargable.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/MaterialesService/src/main/java/com/materialesservice/entity/MaterialDescargableDTO.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/MaterialesService/src/main/java/com/materialesservice/enumeraciones/Curso.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/MaterialesService/src/main/java/com/materialesservice/enumeraciones/NivelEducativo.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/misc.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/misc.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/docker-compose.yaml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/docker-compose.yaml\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"workflow\" />\r\n        <option value=\"Enum\" />\r\n        <option value=\"Dockerfile\" />\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"create_yaml_kubernetes\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;J0seFY&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/J0seFY/monosGPS-docker.git&quot;,\r\n    &quot;accountId&quot;: &quot;cdf8915b-906f-477b-a8ee-7ec83e1d0aa2&quot;\r\n  }\r\n}</component>\r\n  <component name=\"KubernetesApiPersistence\">{}</component>\r\n  <component name=\"KubernetesApiProvider\">{\r\n  &quot;isMigrated&quot;: true\r\n}</component>\r\n  <component name=\"MavenImportPreferences\">\r\n    <option name=\"generalSettings\">\r\n      <MavenGeneralSettings>\r\n        <option name=\"mavenHomeTypeForPersistence\" value=\"WRAPPER\" />\r\n      </MavenGeneralSettings>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 2\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"2wbmCqnYfvkLtjaUUnc9nDwlSwz\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"SHARE_PROJECT_CONFIGURATION_FILES\": \"true\",\r\n    \"Spring Boot.springboot.executor\": \"Run\",\r\n    \"git-widget-placeholder\": \"material-service\",\r\n    \"ignore.virus.scanning.warn.message\": \"true\",\r\n    \"jdk.selected.JAVA_MODULE\": \"openjdk-22\",\r\n    \"kotlin-language-version-configured\": \"true\",\r\n    \"last_opened_file_path\": \"C:/Users/José Fuentes/Documents/monosGPS-docker-1\",\r\n    \"node.js.detected.package.eslint\": \"true\",\r\n    \"node.js.detected.package.tslint\": \"true\",\r\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\r\n    \"nodejs_package_manager_path\": \"npm\",\r\n    \"project.structure.last.edited\": \"Project\",\r\n    \"project.structure.proportion\": \"0.0\",\r\n    \"project.structure.side.proportion\": \"0.0\",\r\n    \"ts.external.directory.path\": \"C:\\\\Users\\\\José Fuentes\\\\Documents\\\\SO\\\\monosGPS\\\\frontend\\\\node_modules\\\\typescript\\\\lib\",\r\n    \"vue.rearranger.settings.migration\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\José Fuentes\\Documents\\SO\\monosGPS\\db-user\" />\r\n      <recent name=\"C:\\Users\\José Fuentes\\Documents\\SO\\monosGPS\\db-establecimientos\" />\r\n      <recent name=\"C:\\Users\\José Fuentes\\Documents\\SO\\monosGPS\\BuscarPersonas\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Spring Boot.springboot\">\r\n    <configuration default=\"true\" type=\"JetRunConfigurationType\">\r\n      <module name=\"establecimientos\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"KotlinStandaloneScriptRunConfigurationType\">\r\n      <module name=\"establecimientos\" />\r\n      <option name=\"filePath\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"PythonConfigurationType\" factoryName=\"Python\">\r\n      <module name=\"establecimientos\" />\r\n      <option name=\"ENV_FILES\" value=\"\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <envs>\r\n        <env name=\"PYTHONUNBUFFERED\" value=\"1\" />\r\n      </envs>\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"\" />\r\n      <option name=\"PARAMETERS\" value=\"\" />\r\n      <option name=\"SHOW_COMMAND_LINE\" value=\"false\" />\r\n      <option name=\"EMULATE_TERMINAL\" value=\"false\" />\r\n      <option name=\"MODULE_MODE\" value=\"false\" />\r\n      <option name=\"REDIRECT_INPUT\" value=\"false\" />\r\n      <option name=\"INPUT_FILE\" value=\"\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"Python.FlaskServer\">\r\n      <module name=\"establecimientos\" />\r\n      <option name=\"ENV_FILES\" value=\"\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\r\n      <option name=\"launchJavascriptDebuger\" value=\"false\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"BuscarPersonasApplication\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\" nameIsGenerated=\"true\">\r\n      <module name=\"BuscarPersonas\" />\r\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"com.buscarpersonas.BuscarPersonasApplication\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"MaterialesServiceApplication\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\" nameIsGenerated=\"true\">\r\n      <option name=\"FRAME_DEACTIVATION_UPDATE_POLICY\" value=\"UpdateClassesAndResources\" />\r\n      <module name=\"MaterialesService\" />\r\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"com.materialesservice.MaterialesServiceApplication\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"springboot\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\">\r\n      <option name=\"ALTERNATIVE_JRE_PATH\" value=\"21\" />\r\n      <option name=\"ALTERNATIVE_JRE_PATH_ENABLED\" value=\"true\" />\r\n      <module name=\"AuthService\" />\r\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"Tox\" factoryName=\"Tox\">\r\n      <module name=\"establecimientos\" />\r\n      <option name=\"ENV_FILES\" value=\"\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"docs\" factoryName=\"Docutils task\">\r\n      <module name=\"establecimientos\" />\r\n      <option name=\"ENV_FILES\" value=\"\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <option name=\"docutils_input_file\" value=\"\" />\r\n      <option name=\"docutils_output_file\" value=\"\" />\r\n      <option name=\"docutils_params\" value=\"\" />\r\n      <option name=\"docutils_task\" value=\"\" />\r\n      <option name=\"docutils_open_in_browser\" value=\"false\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"docs\" factoryName=\"Sphinx task\">\r\n      <module name=\"establecimientos\" />\r\n      <option name=\"ENV_FILES\" value=\"\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <option name=\"docutils_input_file\" value=\"\" />\r\n      <option name=\"docutils_output_file\" value=\"\" />\r\n      <option name=\"docutils_params\" value=\"\" />\r\n      <option name=\"docutils_task\" value=\"\" />\r\n      <option name=\"docutils_open_in_browser\" value=\"false\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"tests\" factoryName=\"Autodetect\">\r\n      <module name=\"establecimientos\" />\r\n      <option name=\"ENV_FILES\" value=\"\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\r\n      <option name=\"_new_additionalArguments\" value=\"&quot;&quot;\" />\r\n      <option name=\"_new_target\" value=\"&quot;&quot;\" />\r\n      <option name=\"_new_targetType\" value=\"&quot;PATH&quot;\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration default=\"true\" type=\"tests\" factoryName=\"Doctests\">\r\n      <module name=\"establecimientos\" />\r\n      <option name=\"ENV_FILES\" value=\"\" />\r\n      <option name=\"INTERPRETER_OPTIONS\" value=\"\" />\r\n      <option name=\"PARENT_ENVS\" value=\"true\" />\r\n      <option name=\"SDK_HOME\" value=\"\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"\" />\r\n      <option name=\"IS_MODULE_SDK\" value=\"false\" />\r\n      <option name=\"ADD_CONTENT_ROOTS\" value=\"true\" />\r\n      <option name=\"ADD_SOURCE_ROOTS\" value=\"true\" />\r\n      <EXTENSION ID=\"PythonCoverageRunConfigurationExtension\" runner=\"coverage.py\" />\r\n      <option name=\"SCRIPT_NAME\" value=\"\" />\r\n      <option name=\"CLASS_NAME\" value=\"\" />\r\n      <option name=\"METHOD_NAME\" value=\"\" />\r\n      <option name=\"FOLDER_NAME\" value=\"\" />\r\n      <option name=\"TEST_TYPE\" value=\"TEST_SCRIPT\" />\r\n      <option name=\"PATTERN\" value=\"\" />\r\n      <option name=\"USE_PATTERN\" value=\"false\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142\" />\r\n        <option value=\"bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"69fdedb7-caf4-4817-bcca-8706df5849c2\" name=\"Changes\" comment=\"\" />\r\n      <created>1746318523066</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1746318523066</updated>\r\n      <workItem from=\"1746318524172\" duration=\"636000\" />\r\n      <workItem from=\"1746456893779\" duration=\"2396000\" />\r\n      <workItem from=\"1746464186562\" duration=\"2460000\" />\r\n      <workItem from=\"1746467009384\" duration=\"80000\" />\r\n      <workItem from=\"1746471854101\" duration=\"5768000\" />\r\n      <workItem from=\"1746557980733\" duration=\"1549000\" />\r\n      <workItem from=\"1746568644314\" duration=\"2030000\" />\r\n      <workItem from=\"1746573725545\" duration=\"92000\" />\r\n      <workItem from=\"1746573831187\" duration=\"41000\" />\r\n      <workItem from=\"1746573884942\" duration=\"6724000\" />\r\n      <workItem from=\"1746586199694\" duration=\"39000\" />\r\n      <workItem from=\"1746586249379\" duration=\"3315000\" />\r\n      <workItem from=\"1746625518312\" duration=\"1528000\" />\r\n      <workItem from=\"1746650951648\" duration=\"15893000\" />\r\n      <workItem from=\"1746727752664\" duration=\"21000\" />\r\n      <workItem from=\"1746727786192\" duration=\"1608000\" />\r\n      <workItem from=\"1746738500944\" duration=\"468000\" />\r\n      <workItem from=\"1746747318332\" duration=\"89000\" />\r\n      <workItem from=\"1746747421221\" duration=\"22000\" />\r\n      <workItem from=\"1746794870025\" duration=\"13000\" />\r\n      <workItem from=\"1746801007421\" duration=\"14000\" />\r\n      <workItem from=\"1746885245383\" duration=\"15000\" />\r\n      <workItem from=\"1746886246280\" duration=\"37000\" />\r\n      <workItem from=\"1746886291375\" duration=\"95000\" />\r\n      <workItem from=\"1746886390196\" duration=\"21000\" />\r\n      <workItem from=\"1747015333431\" duration=\"11000\" />\r\n      <workItem from=\"1752693192592\" duration=\"357000\" />\r\n      <workItem from=\"1752693631891\" duration=\"7551000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"implementacion AuthService para registro y login de usuarios y creacion de docker compose\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1746476503497</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1746476503497</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"implementacion AuthService para registro y login de usuarios y creacion de docker compose\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1746476590191</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1746476590191</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"creacion pipeLine para CI\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1746478072802</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1746478072802</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"refactor de BuscarPersonas-service\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1746559236920</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1746559236920</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"refactor de BuscarPersonas-service\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1746559343553</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1746559343553</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"creacion Dockerfile de BuscarPersonas\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1746573459361</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1746573459361</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"creacion de workflows para cada servicio y base de datos y CI\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1746577829009</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1746577829009</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"correccion ci_db-user.yml\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1746578508628</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1746578508628</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"modificacion para subir al repositorio de dockerhub\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1746579293980</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1746579293980</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"adicion de workflow_dispatch\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1746579672571</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1746579672571</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"update workflows\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1746580180714</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1746580180714</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00012\" summary=\"update workflows\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1746580480128</created>\r\n      <option name=\"number\" value=\"00012\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1746580480128</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00013\" summary=\"prueba CD\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1746657831589</created>\r\n      <option name=\"number\" value=\"00013\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1746657831589</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00014\" summary=\"nuevo docker-compose.yaml\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1746665431014</created>\r\n      <option name=\"number\" value=\"00014\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00014\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1746665431014</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00015\" summary=\"configuracion kubernetes y argoCD\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1746673988082</created>\r\n      <option name=\"number\" value=\"00015\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00015\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1746673988082</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00016\" summary=\"configuracion kubernetes y argoCD\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1746738735621</created>\r\n      <option name=\"number\" value=\"00016\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00016\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1746738735621</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"17\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"implementacion AuthService para registro y login de usuarios y creacion de docker compose\" />\r\n    <MESSAGE value=\"creacion pipeLine para CI\" />\r\n    <MESSAGE value=\"refactor de BuscarPersonas-service\" />\r\n    <MESSAGE value=\"creacion Dockerfile de BuscarPersonas\" />\r\n    <MESSAGE value=\"creacion de workflows para cada servicio y base de datos y CI\" />\r\n    <MESSAGE value=\"correccion ci_db-user.yml\" />\r\n    <MESSAGE value=\"modificacion para subir al repositorio de dockerhub\" />\r\n    <MESSAGE value=\"adicion de workflow_dispatch\" />\r\n    <MESSAGE value=\"update workflows\" />\r\n    <MESSAGE value=\"prueba CD\" />\r\n    <MESSAGE value=\"nuevo docker-compose.yaml\" />\r\n    <MESSAGE value=\"configuracion kubernetes y argoCD\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"configuracion kubernetes y argoCD\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 133e619cd3daa87ea48a45a77afd69dedccb8b80)
++++ b/.idea/workspace.xml	(date 1752874011223)
+@@ -5,22 +5,14 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="69fdedb7-caf4-4817-bcca-8706df5849c2" name="Changes" comment="configuracion kubernetes y argoCD">
+-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/MaterialesService/Dockerfile" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/MaterialesService/src/main/java/com/materialesservice/Config/FileConfig.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/MaterialesService/src/main/java/com/materialesservice/Controller/MaterialDescargableController.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/MaterialesService/src/main/java/com/materialesservice/Repository/MaterialDescargableRepository.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/MaterialesService/src/main/java/com/materialesservice/Service/MaterialDescargableService.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/MaterialesService/src/main/java/com/materialesservice/entity/MaterialDescargable.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/MaterialesService/src/main/java/com/materialesservice/entity/MaterialDescargableDTO.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/MaterialesService/src/main/java/com/materialesservice/enumeraciones/Curso.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/MaterialesService/src/main/java/com/materialesservice/enumeraciones/NivelEducativo.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/MensajesService/src/main/java/com/mensajesservice/Entity/Establecimiento.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/MensajesService/src/main/java/com/mensajesservice/Entity/Estudiante.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/MensajesService/src/main/java/com/mensajesservice/Entity/Profesor.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/MensajesService/src/main/java/com/mensajesservice/repository/EstablecimientoRepository.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -40,7 +32,7 @@
+   <component name="Git.Settings">
+     <option name="RECENT_BRANCH_BY_REPOSITORY">
+       <map>
+-        <entry key="$PROJECT_DIR$" value="create_yaml_kubernetes" />
++        <entry key="$PROJECT_DIR$" value="main" />
+       </map>
+     </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+@@ -77,34 +69,46 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+-    "Spring Boot.springboot.executor": "Run",
+-    "git-widget-placeholder": "material-service",
+-    "ignore.virus.scanning.warn.message": "true",
+-    "jdk.selected.JAVA_MODULE": "openjdk-22",
+-    "kotlin-language-version-configured": "true",
+-    "last_opened_file_path": "C:/Users/José Fuentes/Documents/monosGPS-docker-1",
+-    "node.js.detected.package.eslint": "true",
+-    "node.js.detected.package.tslint": "true",
+-    "node.js.selected.package.eslint": "(autodetect)",
+-    "node.js.selected.package.tslint": "(autodetect)",
+-    "nodejs_package_manager_path": "npm",
+-    "project.structure.last.edited": "Project",
+-    "project.structure.proportion": "0.0",
+-    "project.structure.side.proportion": "0.0",
+-    "ts.external.directory.path": "C:\\Users\\José Fuentes\\Documents\\SO\\monosGPS\\frontend\\node_modules\\typescript\\lib",
+-    "vue.rearranger.settings.migration": "true"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
++    &quot;Spring Boot.springboot.executor&quot;: &quot;Run&quot;,
++    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
++    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
++    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-22&quot;,
++    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
++    &quot;last_opened_file_path&quot;: &quot;C:/Users/José Fuentes/Documents/monosGPS-docker-1&quot;,
++    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
++    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
++    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
++    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
++    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
++    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
++    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
++    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
++    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
++    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\José Fuentes\\Documents\\SO\\monosGPS\\frontend\\node_modules\\typescript\\lib&quot;,
++    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="RecentsManager">
+     <key name="MoveFile.RECENT_KEYS">
++      <recent name="C:\Users\José Fuentes\Documents\monosGPS-docker-1\MensajesService\src\main\java\com\mensajesservice" />
+       <recent name="C:\Users\José Fuentes\Documents\SO\monosGPS\db-user" />
+       <recent name="C:\Users\José Fuentes\Documents\SO\monosGPS\db-establecimientos" />
+       <recent name="C:\Users\José Fuentes\Documents\SO\monosGPS\BuscarPersonas" />
+     </key>
++  </component>
++  <component name="RunDashboard">
++    <option name="configurationTypes">
++      <set>
++        <option value="KtorApplicationConfigurationType" />
++        <option value="MicronautRunConfigurationType" />
++        <option value="QuarkusRunConfigurationType" />
++        <option value="SpringBootApplicationConfigurationType" />
++      </set>
++    </option>
+   </component>
+   <component name="RunManager" selected="Spring Boot.springboot">
+     <configuration default="true" type="JetRunConfigurationType">
+@@ -172,6 +176,14 @@
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
++    <configuration name="MensajesServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
++      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
++      <module name="MensajesService" />
++      <option name="SPRING_BOOT_MAIN_CLASS" value="com.mensajesservice.MensajesServiceApplication" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
+     <configuration name="springboot" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+       <option name="ALTERNATIVE_JRE_PATH" value="21" />
+       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+@@ -309,6 +321,8 @@
+       <workItem from="1747015333431" duration="11000" />
+       <workItem from="1752693192592" duration="357000" />
+       <workItem from="1752693631891" duration="7551000" />
++      <workItem from="1752862131194" duration="5676000" />
++      <workItem from="1752873043701" duration="944000" />
+     </task>
+     <task id="LOCAL-00001" summary="implementacion AuthService para registro y login de usuarios y creacion de docker compose">
+       <option name="closed" value="true" />
+Index: MensajesService/src/main/java/com/mensajesservice/repository/EstablecimientoRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/MensajesService/src/main/java/com/mensajesservice/repository/EstablecimientoRepository.java b/MensajesService/src/main/java/com/mensajesservice/repository/EstablecimientoRepository.java
+new file mode 100644
+--- /dev/null	(date 1752873174988)
++++ b/MensajesService/src/main/java/com/mensajesservice/repository/EstablecimientoRepository.java	(date 1752873174988)
+@@ -0,0 +1,4 @@
++package com.mensajesservice.repository;
++
++public class EstablecimientoRepository {
++}
