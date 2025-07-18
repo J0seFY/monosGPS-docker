@@ -45,7 +45,7 @@
 .btn-filtrar {
   grid-column: 1 / -1;
   padding: 12px 24px;
-  background-color: #007bff;
+  background-color: #080808;
   color: white;
   border: none;
   border-radius: 6px;
@@ -55,7 +55,7 @@
 }
 
 .btn-filtrar:hover:not(:disabled) {
-  background-color: #0056b3;
+  background-color: #494c50;
 }
 
 .btn-filtrar:disabled {

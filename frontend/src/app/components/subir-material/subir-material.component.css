@@ -68,12 +68,12 @@ form {
 }
 
 .btn-primary {
-  background-color: #007bff;
+  background-color: #1e1f20;
   color: white;
 }
 
 .btn-primary:hover:not(:disabled) {
-  background-color: #0056b3;
+  background-color: #27292c;
 }
 
 .btn-primary:disabled {
