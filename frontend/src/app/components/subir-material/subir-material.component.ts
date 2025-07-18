@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
+import { MaterialDescargableService } from '../../servicios/material-descargable.service';
 @Component({
   selector: 'app-subir-material',
   templateUrl: './subir-material.component.html',
@@ -16,8 +15,9 @@ export class SubirMaterialComponent {
 
   archivoSeleccionado: File | null = null;
   mensaje = '';
+  cargando = false;
 
-  constructor(private http: HttpClient) {}
+  constructor(private materialService: MaterialDescargableService) {}
 
   onNivelChange() {
     if (this.nivelSeleccionado === 'Parvularia') {
@@ -43,21 +43,25 @@ export class SubirMaterialComponent {
   }
 
   subirMaterial() {
-    if (this.archivoSeleccionado) {
-      const formData = new FormData();
-      formData.append('archivo', this.archivoSeleccionado);
-      formData.append('nivel', this.nivelSeleccionado);
-      formData.append('curso', this.cursoSeleccionado);
-      formData.append('nombreOriginal', this.nombreArchivo.trim());
+    if (this.archivoSeleccionado && this.nivelSeleccionado && this.cursoSeleccionado) {
+      this.cargando = true;
+      this.mensaje = '';
 
-      this.http.post('http://localhost:3000/api/materiales', formData).subscribe({
-        next: () => {
+      this.materialService.subirArchivo(
+        this.archivoSeleccionado,
+        this.nivelSeleccionado,
+        this.cursoSeleccionado
+      ).subscribe({
+        next: (response) => {
           this.mensaje = 'Material subido correctamente.';
           this.limpiarFormulario();
+          this.cargando = false;
         },
-        error: () => {
-          this.mensaje = 'Error al subir el material.';
-        },
+        error: (error) => {
+          console.error('Error al subir material:', error);
+          this.mensaje = 'Error al subir el material: ' + (error.error || 'Error desconocido');
+          this.cargando = false;
+        }
       });
     }
   }

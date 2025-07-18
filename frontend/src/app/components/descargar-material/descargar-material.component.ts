@@ -1,25 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
+import { MaterialDescargableDTO, MaterialDescargableService } from '../../servicios/material-descargable.service';
 @Component({
   selector: 'app-descargar-material',
   templateUrl: './descargar-material.component.html',
   styleUrl: './descargar-material.component.css'
 })
-export class DescargarMaterialComponent {
+export class DescargarMaterialComponent implements OnInit {
   niveles: string[] = ['Parvularia', 'Básica', 'Media'];
   cursosDisponibles: string[] = [];
 
   nivelSeleccionado: string = '';
   cursoSeleccionado: string = '';
 
-  materialTotal: any[] = [];
-  materialFiltrado: any[] = [];
+  materialFiltrado: MaterialDescargableDTO[] = [];
+  cargando = false;
+  mensaje = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private materialService: MaterialDescargableService) {}
 
   ngOnInit(): void {
-    this.obtenerMaterialDesdeBackend();
+    // Inicializar con el primer nivel
+    if (this.niveles.length > 0) {
+      this.nivelSeleccionado = this.niveles[0];
+      this.onNivelChange();
+    }
   }
 
   onNivelChange() {
@@ -35,17 +39,50 @@ export class DescargarMaterialComponent {
     this.materialFiltrado = [];
   }
 
-  obtenerMaterialDesdeBackend() {
-    this.http.get<any[]>('http://localhost:3000/api/materiales').subscribe((data) => {
-      this.materialTotal = data;
+  filtrarMaterial() {
+    if (this.nivelSeleccionado && this.cursoSeleccionado) {
+      this.cargando = true;
+      this.mensaje = '';
+
+      this.materialService.listarArchivos(this.nivelSeleccionado, this.cursoSeleccionado)
+        .subscribe({
+          next: (materiales) => {
+            this.materialFiltrado = materiales;
+            this.cargando = false;
+            if (materiales.length === 0) {
+              this.mensaje = 'No hay material disponible para el nivel y curso seleccionado.';
+            }
+          },
+          error: (error) => {
+            console.error('Error al cargar material:', error);
+            this.mensaje = 'Error al cargar el material.';
+            this.materialFiltrado = [];
+            this.cargando = false;
+          }
+        });
+    }
+  }
+
+  descargarArchivo(material: MaterialDescargableDTO) {
+    this.materialService.descargarArchivo(material.id).subscribe({
+      next: (blob) => {
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = material.nombreOriginal || 'archivo.pdf';
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+      },
+      error: (error) => {
+        console.error('Error al descargar archivo:', error);
+        this.mensaje = 'Error al descargar el archivo.';
+      }
     });
   }
 
-  filtrarMaterial() {
-    this.materialFiltrado = this.materialTotal.filter(
-      (m) =>
-        m.nivel === this.nivelSeleccionado &&
-        m.curso === this.cursoSeleccionado
-    );
+  obtenerUrlDescarga(material: MaterialDescargableDTO): string {
+    return this.materialService.obtenerUrlDescarga(material.id);
   }
 }

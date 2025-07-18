@@ -1,28 +1,60 @@
 <div class="descarga-material-container">
-    <h1>Descarga de Material Educativo</h1>
-  
-    <div class="filtros">
-      <label for="nivel">Nivel:</label>
-      <select id="nivel" [(ngModel)]="nivelSeleccionado" (change)="onNivelChange()">
-        <option *ngFor="let nivel of niveles" [value]="nivel">{{ nivel }}</option>
-      </select>
-  
-      <label for="curso">Curso:</label>
-      <select id="curso" [(ngModel)]="cursoSeleccionado" (change)="filtrarMaterial()">
-        <option *ngFor="let curso of cursosDisponibles" [value]="curso">{{ curso }}</option>
-      </select>
-    </div>
-  
-    <div *ngIf="materialFiltrado.length > 0; else sinMaterial">
-      <ul class="lista-material">
-        <li *ngFor="let material of materialFiltrado">
-          <a [href]="material.url" download>{{ material.nombre }}</a>
-        </li>
-      </ul>
-    </div>
-  
-    <ng-template #sinMaterial>
-      <p>No hay material disponible para el nivel y curso seleccionado.</p>
-    </ng-template>
+  <h1>Descarga de Material Educativo</h1>
+
+  <div class="filtros">
+    <label for="nivel">Nivel:</label>
+    <select id="nivel" [(ngModel)]="nivelSeleccionado" (change)="onNivelChange()">
+      <option value="">Selecciona un nivel</option>
+      <option *ngFor="let nivel of niveles" [value]="nivel">{{ nivel }}</option>
+    </select>
+
+    <label for="curso">Curso:</label>
+    <select id="curso" [(ngModel)]="cursoSeleccionado" (change)="filtrarMaterial()" [disabled]="!nivelSeleccionado">
+      <option value="">Selecciona un curso</option>
+      <option *ngFor="let curso of cursosDisponibles" [value]="curso">{{ curso }}</option>
+    </select>
+
+    <button 
+      type="button" 
+      (click)="filtrarMaterial()" 
+      [disabled]="!nivelSeleccionado || !cursoSeleccionado || cargando"
+      class="btn-filtrar">
+      {{ cargando ? 'Cargando...' : 'Buscar Material' }}
+    </button>
   </div>
-  
+
+  <div class="loading" *ngIf="cargando">
+    <p>Cargando material...</p>
+  </div>
+
+  <div *ngIf="mensaje && !cargando" class="mensaje">
+    <p>{{ mensaje }}</p>
+  </div>
+
+  <div *ngIf="materialFiltrado.length > 0 && !cargando" class="material-encontrado">
+    <h3>Material Disponible:</h3>
+    <ul class="lista-material">
+      <li *ngFor="let material of materialFiltrado" class="material-item">
+        <div class="material-info">
+          <h4>{{ material.nombreOriginal }}</h4>
+          <p class="fecha">Subido: {{ material.fechaSubida | date:'dd/MM/yyyy' }}</p>
+        </div>
+        <div class="material-acciones">
+          <button 
+            type="button" 
+            (click)="descargarArchivo(material)" 
+            class="btn-descargar">
+            Descargar
+          </button>
+          <!-- Alternativa: enlace directo -->
+          <a 
+            [href]="obtenerUrlDescarga(material)" 
+            target="_blank" 
+            class="btn-ver">
+            Ver
+          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
