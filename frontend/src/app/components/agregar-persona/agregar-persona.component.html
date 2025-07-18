@@ -63,8 +63,13 @@
 
       <!-- Establecimiento -->
       <div class="form-group mb-3">
-        <label>Nombre del Establecimiento</label>
-        <input type="text" [(ngModel)]="persona.establecimiento" name="establecimiento" class="form-control" required />
+        <label>Seleccionar Establecimiento</label>
+        <select [(ngModel)]="persona.establecimiento" name="establecimiento" class="form-control" required>
+          <option value="">Seleccione un establecimiento</option>
+          <option *ngFor="let colegio of colegios" [value]="colegio.id">
+            {{ colegio.nombre }}
+          </option>
+        </select>
       </div>
 
       <!-- Botón -->
