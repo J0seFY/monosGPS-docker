@@ -35,6 +35,8 @@ export class AgregarPersonaComponent {
   constructor(private http: HttpClient, private personaService: PersonaService) { }
 
   agregarPersona() {
+    this.persona.establecimiento = Number(this.persona.establecimiento);
+    
     this.personaService.agregarPersona(this.persona).subscribe({
       next: () => {
         this.mensaje = 'Persona agregada correctamente.';
@@ -48,7 +50,7 @@ export class AgregarPersonaComponent {
           curso: '',
           asignatura: '',
           fechaNacimiento: '',
-          establecimiento: ''
+          establecimiento: '',
         };
       },
       error: (err) => {

@@ -22,6 +22,11 @@ scrape_configs:
     static_configs:
       - targets: ['buscarpersonas:8082']
 
+  - job_name: 'materialesservice'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['materialesservice:8082']  
+
   - job_name: 'grafana-monos'
     static_configs:
       - targets: ['grafana-monos:3000']
