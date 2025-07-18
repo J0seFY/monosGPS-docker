@@ -25,11 +25,11 @@ export class AgregarPersonaComponent {
 
   // Lista de colegios con ID y nombre
   colegios = [
-    { id: 1, nombre: 'Colegio Concepcion' },
+    { id: 1, nombre: 'Colegio San Patricio' },
     { id: 2, nombre: 'Liceo Técnico Industrial' },
-    { id: 3, nombre: 'Colegio Santa Maria' },
-    { id: 4, nombre: 'Colegio Chillan' },
-    { id: 5, nombre: 'Colegio Alemán' },
+    { id: 3, nombre: 'Colegio Santa Teresa' },
+    { id: 4, nombre: 'Instituto Nacional' },
+    { id: 5, nombre: 'Colegio Alemán' }
   ];
 
   constructor(private http: HttpClient, private personaService: PersonaService) { }
