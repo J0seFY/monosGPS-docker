@@ -12,7 +12,6 @@ import java.io.ByteArrayOutputStream;
 
 @RestController
 @RequestMapping("/api/reportes")
-@CrossOrigin(origins = "*")
 public class ReporteMatriculaController {
     
     @Autowired
