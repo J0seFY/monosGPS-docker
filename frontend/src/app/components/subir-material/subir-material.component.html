@@ -1,37 +1,67 @@
 <div class="subir-material-container">
-    <h1>Subir Material Educativo</h1>
-  
-    <form (ngSubmit)="subirMaterial()" #materialForm="ngForm">
-  
+  <h1>Subir Material Educativo</h1>
+
+  <form (ngSubmit)="subirMaterial()" #materialForm="ngForm">
+
+    <div class="campo">
       <label for="nivel">Nivel:</label>
-      <select id="nivel" required [(ngModel)]="nivelSeleccionado" name="nivel" (change)="onNivelChange()">
+      <select 
+        id="nivel" 
+        required 
+        [(ngModel)]="nivelSeleccionado" 
+        name="nivel" 
+        (change)="onNivelChange()"
+        [disabled]="cargando">
+        <option value="">Selecciona un nivel</option>
         <option *ngFor="let nivel of niveles" [value]="nivel">{{ nivel }}</option>
       </select>
-  
+    </div>
+
+    <div class="campo">
       <label for="curso">Curso:</label>
-      <select id="curso" required [(ngModel)]="cursoSeleccionado" name="curso">
+      <select 
+        id="curso" 
+        required 
+        [(ngModel)]="cursoSeleccionado" 
+        name="curso"
+        [disabled]="!nivelSeleccionado || cargando">
+        <option value="">Selecciona un curso</option>
         <option *ngFor="let curso of cursosDisponibles" [value]="curso">{{ curso }}</option>
       </select>
-  
-      <label for="nombreArchivo">Nombre para el archivo:</label>
-      <input
-        type="text"
-        id="nombreArchivo"
-        required
-        [(ngModel)]="nombreArchivo"
-        name="nombreArchivo"
-        placeholder="Ej: Guía Matemática 1° Básico"
-      />
-  
+    </div>
+
+    <div class="campo">
       <label for="archivo">Archivo PDF:</label>
-      <input type="file" id="archivo" required (change)="onArchivoSeleccionado($event)" accept="application/pdf" />
-  
-      <button type="submit" [disabled]="!archivoSeleccionado || !nivelSeleccionado || !cursoSeleccionado || !nombreArchivo">
-        Subir Material
+      <input 
+        type="file" 
+        id="archivo" 
+        required 
+        (change)="onArchivoSeleccionado($event)" 
+        accept="application/pdf"
+        [disabled]="cargando" />
+      <small class="ayuda">Solo se permiten archivos PDF</small>
+    </div>
+
+    <div class="acciones">
+      <button 
+        type="submit" 
+        [disabled]="!archivoSeleccionado || !nivelSeleccionado || !cursoSeleccionado || cargando || !materialForm.valid"
+        class="btn-primary">
+        {{ cargando ? 'Subiendo...' : 'Subir Material' }}
       </button>
-  
-    </form>
-  
-    <p *ngIf="mensaje">{{ mensaje }}</p>
+
+      <button 
+        type="button" 
+        (click)="limpiarFormulario()" 
+        [disabled]="cargando"
+        class="btn-secondary">
+        Limpiar
+      </button>
+    </div>
+
+  </form>
+
+  <div *ngIf="mensaje" class="mensaje" [class.error]="mensaje.includes('Error')">
+    <p>{{ mensaje }}</p>
   </div>
-  
+</div>
