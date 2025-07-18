@@ -13,11 +13,12 @@ export class AgregarPersonaComponent {
     rut: '',
     nombre: '',
     apellido: '',
+    correo:'',
     telefono: '',
     curso: '',
     asignatura: '',
     fechaNacimiento: '',
-    establecimiento: null
+    establecimiento: 0  // Cambiar de '' a 0
   };
 
   mensaje: string = '';
@@ -48,7 +49,7 @@ export class AgregarPersonaComponent {
           curso: '',
           asignatura: '',
           fechaNacimiento: '',
-          establecimiento: null,
+          establecimiento:0 ,
         };
       },
       error: (err) => {
