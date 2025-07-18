@@ -61,12 +61,11 @@
         <input type="text" [(ngModel)]="persona.asignatura" name="asignatura" class="form-control" />
       </div>
 
-      <!-- Establecimiento -->
       <div class="form-group mb-3">
         <label>Seleccionar Establecimiento</label>
         <select [(ngModel)]="persona.establecimiento" name="establecimiento" class="form-control" required>
-          <option value="">Seleccione un establecimiento</option>
-          <option *ngFor="let colegio of colegios" [value]="colegio.id">
+          <option [value]="0">Seleccione un establecimiento</option>
+          <option *ngFor="let colegio of colegios" [value]="+colegio.id">
             {{ colegio.nombre }}
           </option>
         </select>
