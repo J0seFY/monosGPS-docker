@@ -15,7 +15,7 @@ export interface MaterialDescargableDTO {
   providedIn: 'root'
 })
 export class MaterialDescargableService {
-  private baseUrl = '/'; // Ajusta según tu puerto de Spring Boot
+  private baseUrl = '/materiales'; // Ajusta según tu puerto de Spring Boot
 
   constructor(private http: HttpClient) {}
 
