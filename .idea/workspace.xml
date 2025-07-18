@@ -5,22 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="69fdedb7-caf4-4817-bcca-8706df5849c2" name="Changes" comment="configuracion kubernetes y argoCD">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MaterialesService/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MaterialesService/src/main/java/com/materialesservice/Config/FileConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MaterialesService/src/main/java/com/materialesservice/Controller/MaterialDescargableController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MaterialesService/src/main/java/com/materialesservice/Repository/MaterialDescargableRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MaterialesService/src/main/java/com/materialesservice/Service/MaterialDescargableService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MaterialesService/src/main/java/com/materialesservice/entity/MaterialDescargable.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MaterialesService/src/main/java/com/materialesservice/entity/MaterialDescargableDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MaterialesService/src/main/java/com/materialesservice/enumeraciones/Curso.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MaterialesService/src/main/java/com/materialesservice/enumeraciones/NivelEducativo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MensajesService/src/main/java/com/mensajesservice/Entity/Establecimiento.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MensajesService/src/main/java/com/mensajesservice/Entity/Estudiante.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MensajesService/src/main/java/com/mensajesservice/Entity/Profesor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MensajesService/src/main/java/com/mensajesservice/repository/EstablecimientoRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +32,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="create_yaml_kubernetes" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -77,34 +69,46 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.springboot.executor": "Run",
-    "git-widget-placeholder": "material-service",
-    "ignore.virus.scanning.warn.message": "true",
-    "jdk.selected.JAVA_MODULE": "openjdk-22",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/José Fuentes/Documents/monosGPS-docker-1",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "ts.external.directory.path": "C:\\Users\\José Fuentes\\Documents\\SO\\monosGPS\\frontend\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.springboot.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-22&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/José Fuentes/Documents/monosGPS-docker-1&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\José Fuentes\\Documents\\SO\\monosGPS\\frontend\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\José Fuentes\Documents\monosGPS-docker-1\MensajesService\src\main\java\com\mensajesservice" />
       <recent name="C:\Users\José Fuentes\Documents\SO\monosGPS\db-user" />
       <recent name="C:\Users\José Fuentes\Documents\SO\monosGPS\db-establecimientos" />
       <recent name="C:\Users\José Fuentes\Documents\SO\monosGPS\BuscarPersonas" />
     </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="KtorApplicationConfigurationType" />
+        <option value="MicronautRunConfigurationType" />
+        <option value="QuarkusRunConfigurationType" />
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
   </component>
   <component name="RunManager" selected="Spring Boot.springboot">
     <configuration default="true" type="JetRunConfigurationType">
@@ -168,6 +172,14 @@
       <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
       <module name="MaterialesService" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.materialesservice.MaterialesServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MensajesServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="MensajesService" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.mensajesservice.MensajesServiceApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -309,6 +321,8 @@
       <workItem from="1747015333431" duration="11000" />
       <workItem from="1752693192592" duration="357000" />
       <workItem from="1752693631891" duration="7551000" />
+      <workItem from="1752862131194" duration="5676000" />
+      <workItem from="1752873043701" duration="944000" />
     </task>
     <task id="LOCAL-00001" summary="implementacion AuthService para registro y login de usuarios y creacion de docker compose">
       <option name="closed" value="true" />
