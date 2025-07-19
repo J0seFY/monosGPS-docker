@@ -1,4 +1,3 @@
-// controller/ReporteMatriculaController.java
 package com.buscarpersonas.Controller;
 
 import com.buscarpersonas.dto.MatriculasComunalesDTO;
@@ -32,31 +31,108 @@ public class ReporteMatriculaController {
     @Autowired
     private EstudianteRepository estudianteRepository;
 
+    /**
+     * Generar reporte PDF por comuna específica
+     * URL: /api/reportes/matriculas-comunales/pdf?comuna=Chillán
+     */
     @GetMapping("/matriculas-comunales/pdf")
-    public ResponseEntity<byte[]> generarReporteMatriculasPDF(@RequestParam String comuna) {
+    public ResponseEntity<byte[]> generarReporteMatriculasPorComuna(@RequestParam String comuna) {
         try {
+            logger.info("Generando reporte PDF para comuna: {}", comuna);
+            
             ByteArrayOutputStream baos = reporteService.generarReporteMatriculasPDF(comuna);
+            byte[] pdfBytes = baos.toByteArray();
+            
+            // Verificar que se generó contenido
+            if (pdfBytes.length == 0) {
+                logger.error("El PDF generado está vacío para comuna: {}", comuna);
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+            }
+            
+            String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
+            String nombreArchivo = "reporte_matriculas_" + comuna + "_" + timestamp + ".pdf";
             
             HttpHeaders headers = new HttpHeaders();
-            headers.add("Content-Type", "application/pdf");
-            headers.add("Content-Disposition", "attachment; filename=reporte_matriculas_" + comuna + ".pdf");
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", nombreArchivo);
+            headers.setContentLength(pdfBytes.length);
+            headers.setCacheControl("no-cache, no-store, must-revalidate");
+            headers.setPragma("no-cache");
+            headers.setExpires(0);
+            
+            logger.info("PDF generado correctamente para comuna {}: {} bytes", comuna, pdfBytes.length);
             
             return ResponseEntity.ok()
                     .headers(headers)
-                    .body(baos.toByteArray());
+                    .body(pdfBytes);
                     
         } catch (Exception e) {
+            logger.error("Error al generar reporte para comuna: " + comuna, e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(("Error al generar reporte: " + e.getMessage()).getBytes());
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(("{\"error\":\"Error al generar reporte: " + e.getMessage() + "\"}").getBytes());
         }
     }
 
-    @GetMapping("/matriculas-comunales/pdf")
-    public ResponseEntity<byte[]> descargarInformeMatriculasPDF() {
+    /**
+     * Generar certificado comunal - ESTE ES EL ENDPOINT QUE ANGULAR ESTÁ LLAMANDO
+     * URL: /api/reportes/matriculas-comunales/certificado?comuna=Chillán
+     */
+    @GetMapping("/matriculas-comunales/certificado")
+    public ResponseEntity<byte[]> generarCertificadoComunal(@RequestParam String comuna) {
+        try {
+            logger.info("Generando certificado comunal para: {}", comuna);
+            
+            // Usar el mismo servicio que para el PDF por comuna
+            ByteArrayOutputStream baos = reporteService.generarReporteMatriculasPDF(comuna);
+            byte[] pdfBytes = baos.toByteArray();
+            
+            // Verificar que se generó contenido
+            if (pdfBytes.length == 0) {
+                logger.error("El certificado generado está vacío para comuna: {}", comuna);
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+            }
+            
+            String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
+            String nombreArchivo = "certificado_comunal_" + comuna + "_" + timestamp + ".pdf";
+            
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDispositionFormData("attachment", nombreArchivo);
+            headers.setContentLength(pdfBytes.length);
+            headers.setCacheControl("no-cache, no-store, must-revalidate");
+            headers.setPragma("no-cache");
+            headers.setExpires(0);
+            
+            logger.info("Certificado generado correctamente para {}: {} bytes", comuna, pdfBytes.length);
+            
+            return ResponseEntity.ok()
+                    .headers(headers)
+                    .body(pdfBytes);
+                    
+        } catch (Exception e) {
+            logger.error("Error al generar certificado para comuna: " + comuna, e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(("{\"error\":\"Error al generar certificado: " + e.getMessage() + "\"}").getBytes());
+        }
+    }
+
+    /**
+     * Generar informe general de todas las comunas
+     * URL: /api/reportes/matriculas-comunales/informe-general
+     */
+    @GetMapping("/matriculas-comunales/informe-general")
+    public ResponseEntity<byte[]> descargarInformeMatriculasGeneral() {
         try {
             logger.info("Solicitud de informe general de matrículas comunales");
 
             byte[] pdfBytes = matriculasPDFService.generarInformeMatriculasComunales();
+            
+            if (pdfBytes.length == 0) {
+                logger.error("El informe general generado está vacío");
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+            }
 
             String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
             String nombreArchivo = "informe_matriculas_comunales_" + timestamp + ".pdf";
@@ -65,8 +141,11 @@ public class ReporteMatriculaController {
             headers.setContentType(MediaType.APPLICATION_PDF);
             headers.setContentDispositionFormData("attachment", nombreArchivo);
             headers.setContentLength(pdfBytes.length);
+            headers.setCacheControl("no-cache, no-store, must-revalidate");
+            headers.setPragma("no-cache");
+            headers.setExpires(0);
 
-            logger.info("PDF generado correctamente: {}", nombreArchivo);
+            logger.info("PDF general generado correctamente: {} ({} bytes)", nombreArchivo, pdfBytes.length);
 
             return ResponseEntity.ok()
                     .headers(headers)
@@ -74,7 +153,9 @@ public class ReporteMatriculaController {
 
         } catch (Exception e) {
             logger.error("Error al generar informe general de matrículas comunales", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(("{\"error\":\"Error al generar informe general: " + e.getMessage() + "\"}").getBytes());
         }
     }
 
