@@ -69,20 +69,64 @@ export class GenerarReportesComponent {
   downloadMatriculaComunalReport() {
     const url = 'http://pacheco.chillan.ubiobio.cl:8000/api/reportes/matriculas-comunales/certificado?comuna=Chillán';
     
-    this.http.get(url, { responseType: 'blob' }).subscribe({
+    console.log('Descargando desde:', url);
+    
+    this.http.get(url, { 
+      responseType: 'blob',
+      headers: {
+        'Accept': 'application/pdf'
+      }
+    }).subscribe({
       next: (response: Blob) => {
+        console.log('Respuesta recibida:', response);
+        console.log('Tamaño del blob:', response.size);
+        console.log('Tipo del blob:', response.type);
+        
+        // Verificar que la respuesta sea válida
+        if (response.size === 0) {
+          alert('El archivo descargado está vacío. Verifique el reporte.');
+          return;
+        }
+        
+        // Verificar si realmente es un PDF
+        if (response.type && !response.type.includes('pdf') && !response.type.includes('octet-stream')) {
+          console.warn('El tipo de archivo no parece ser PDF:', response.type);
+          // Intentar leer el contenido como texto para ver si hay un error
+          response.text().then(text => {
+            console.log('Contenido de la respuesta:', text.substring(0, 200));
+          });
+        }
+        
         // Crear un blob URL y descargar el archivo
         const blob = new Blob([response], { type: 'application/pdf' });
         const downloadURL = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = downloadURL;
         link.download = 'matricula-comunal.pdf';
+        
+        // Forzar la descarga
+        document.body.appendChild(link);
         link.click();
-        window.URL.revokeObjectURL(downloadURL);
+        document.body.removeChild(link);
+        
+        // Limpiar el URL después de un breve delay
+        setTimeout(() => {
+          window.URL.revokeObjectURL(downloadURL);
+        }, 100);
       },
       error: (error: HttpErrorResponse) => {
-        console.error('Error al descargar el reporte:', error);
-        alert('Error al descargar el reporte. Por favor, inténtalo de nuevo.');
+        console.error('Error completo:', error);
+        console.log('Status:', error.status);
+        console.log('Status Text:', error.statusText);
+        console.log('Error message:', error.message);
+        
+        if (error.status === 0) {
+          alert('Error de conexión. Verifique que el servidor esté disponible y que no haya problemas de CORS.');
+        } else if (error.status === 404) {
+          alert('El endpoint no fue encontrado. Verifique la URL del servidor.');
+        } else {
+          alert(`Error al descargar el reporte (${error.status}): ${error.message}`);
+        }
       }
     });
   }
