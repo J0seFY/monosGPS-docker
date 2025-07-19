@@ -38,6 +38,8 @@ export class GenerarReportesComponent {
   onReportSelected(report: string) {
     if (report === 'Centralización de información de todas las comunidades educativas') {
       this.downloadCentralizacionReport();
+    } else if (report === 'Matrícula Comunal ') {
+      this.downloadMatriculaComunalReport();
     }
     // Cerrar el dropdown después de seleccionar
     this.isOpen = false;
@@ -54,6 +56,27 @@ export class GenerarReportesComponent {
         const link = document.createElement('a');
         link.href = downloadURL;
         link.download = 'centralizacion-informacion-comunidades.pdf';
+        link.click();
+        window.URL.revokeObjectURL(downloadURL);
+      },
+      error: (error: HttpErrorResponse) => {
+        console.error('Error al descargar el reporte:', error);
+        alert('Error al descargar el reporte. Por favor, inténtalo de nuevo.');
+      }
+    });
+  }
+
+  downloadMatriculaComunalReport() {
+    const url = 'http://pacheco.chillan.ubiobio.cl:8000/api/reportes/matriculas-comunales/certificado?comuna=Chillán';
+    
+    this.http.get(url, { responseType: 'blob' }).subscribe({
+      next: (response: Blob) => {
+        // Crear un blob URL y descargar el archivo
+        const blob = new Blob([response], { type: 'application/pdf' });
+        const downloadURL = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = downloadURL;
+        link.download = 'matricula-comunal.pdf';
         link.click();
         window.URL.revokeObjectURL(downloadURL);
       },
