@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-generar-reportes',
@@ -28,7 +29,38 @@ export class GenerarReportesComponent {
     'Búsqueda de personas: alumnos, apoderados, profesores, administrativos',
   ];
 
+  constructor(private http: HttpClient) {}
+
   toggleDropdown() {
     this.isOpen = !this.isOpen;
+  }
+
+  onReportSelected(report: string) {
+    if (report === 'Centralización de información de todas las comunidades educativas') {
+      this.downloadCentralizacionReport();
+    }
+    // Cerrar el dropdown después de seleccionar
+    this.isOpen = false;
+  }
+
+  downloadCentralizacionReport() {
+    const url = 'http://pacheco.chillan.ubiobio.cl:8000/api/reportes/matriculas-comunales/pdf?comuna=Chillán';
+    
+    this.http.get(url, { responseType: 'blob' }).subscribe({
+      next: (response: Blob) => {
+        // Crear un blob URL y descargar el archivo
+        const blob = new Blob([response], { type: 'application/pdf' });
+        const downloadURL = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = downloadURL;
+        link.download = 'centralizacion-informacion-comunidades.pdf';
+        link.click();
+        window.URL.revokeObjectURL(downloadURL);
+      },
+      error: (error: HttpErrorResponse) => {
+        console.error('Error al descargar el reporte:', error);
+        alert('Error al descargar el reporte. Por favor, inténtalo de nuevo.');
+      }
+    });
   }
 }
