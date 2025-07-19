@@ -10,6 +10,9 @@
   
       <ul *ngIf="isOpen" class="dropdown-list">
         <li *ngFor="let report of reports">
+          (click)="onReportClick(report)"
+          [class.clickable]="report === 'Centralización de información de todas las comunidades educativas'"
+          [class.disabled]="report !== 'Centralización de información de todas las comunidades educativas'">
           {{ report }}
         </li>
       </ul>
