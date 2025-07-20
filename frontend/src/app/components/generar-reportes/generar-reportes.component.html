@@ -1,18 +1,17 @@
 <section class="generar-reporte-container">
-    <h1>Generación de Reportes</h1>
-    <p>En este apartado puedes descargar y visualizar distintos reportes relacionados con la gestión comunal educativa.</p>
+  <h1>Generación de Reportes</h1>
+  <p>En este apartado puedes descargar y visualizar distintos reportes relacionados con la gestión comunal educativa.</p>
   
-    <div class="report-dropdown">
-      <button (click)="toggleDropdown()" class="dropdown-toggle">
-        Seleccionar tipo de reporte
-        <span [class.rotated]="isOpen">▼</span>
-      </button>
-  
-      <ul *ngIf="isOpen" class="dropdown-list">
-        <li *ngFor="let report of reports">
-          {{ report }}
-        </li>
-      </ul>
-    </div>
-  </section>
-  
+  <div class="report-dropdown">
+    <button (click)="toggleDropdown()" class="dropdown-toggle">
+      Seleccionar tipo de reporte
+      <span [class.rotated]="isOpen">▼</span>
+    </button>
+    
+    <ul *ngIf="isOpen" class="dropdown-list">
+      <li *ngFor="let report of reports" (click)="onReportSelected(report)">
+        {{ report }}
+      </li>
+    </ul>
+  </div>
+</section>
