@@ -95,6 +95,10 @@ public class InformeRendimientoController {
                     "totalAsignaturas", rendimientos.stream()
                             .map(RendimientoAsignaturaDTO::getAsignatura)
                             .distinct()
+                            .count(),
+                    "totalEstudiantes", rendimientos.stream()
+                            .map(RendimientoAsignaturaDTO::getEstudianteRut)
+                            .distinct()
                             .count()
                 ));
             }

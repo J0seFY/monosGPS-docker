@@ -1,39 +1,31 @@
- package com.buscarpersonas.dto;
+package com.buscarpersonas.dto;
 
 import java.math.BigDecimal;
 
 public class RendimientoAsignaturaDTO {
     private String estudianteRut;
-    private String nombreCompleto;
     private String asignatura;
     private BigDecimal promedioNotas;
     private Integer cantidadNotas;
     private BigDecimal notaMaxima;
     private BigDecimal notaMinima;
-    private String nombreEstablecimiento;
 
     public RendimientoAsignaturaDTO() {}
 
-    public RendimientoAsignaturaDTO(String estudianteRut, String nombre, String apellido, 
-                                   String asignatura, BigDecimal promedioNotas, 
-                                   Integer cantidadNotas, BigDecimal notaMaxima, 
-                                   BigDecimal notaMinima, String nombreEstablecimiento) {
+    public RendimientoAsignaturaDTO(String estudianteRut, String asignatura, 
+                                   BigDecimal promedioNotas, Integer cantidadNotas, 
+                                   BigDecimal notaMaxima, BigDecimal notaMinima) {
         this.estudianteRut = estudianteRut;
-        this.nombreCompleto = nombre + " " + apellido;
         this.asignatura = asignatura;
         this.promedioNotas = promedioNotas;
         this.cantidadNotas = cantidadNotas;
         this.notaMaxima = notaMaxima;
         this.notaMinima = notaMinima;
-        this.nombreEstablecimiento = nombreEstablecimiento;
     }
 
     // Getters y Setters
     public String getEstudianteRut() { return estudianteRut; }
     public void setEstudianteRut(String estudianteRut) { this.estudianteRut = estudianteRut; }
-
-    public String getNombreCompleto() { return nombreCompleto; }
-    public void setNombreCompleto(String nombreCompleto) { this.nombreCompleto = nombreCompleto; }
 
     public String getAsignatura() { return asignatura; }
     public void setAsignatura(String asignatura) { this.asignatura = asignatura; }
@@ -49,7 +41,4 @@ public class RendimientoAsignaturaDTO {
 
     public BigDecimal getNotaMinima() { return notaMinima; }
     public void setNotaMinima(BigDecimal notaMinima) { this.notaMinima = notaMinima; }
-
-    public String getNombreEstablecimiento() { return nombreEstablecimiento; }
-    public void setNombreEstablecimiento(String nombreEstablecimiento) { this.nombreEstablecimiento = nombreEstablecimiento; }
 }

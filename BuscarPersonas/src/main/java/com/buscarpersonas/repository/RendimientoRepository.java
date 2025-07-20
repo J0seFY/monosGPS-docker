@@ -15,20 +15,15 @@ public interface RendimientoRepository extends JpaRepository<Rendimiento, Intege
     @Query(value = """
         SELECT 
             r.estudiante_rut,
-            e.nombre,
-            e.apellido,
             r.asignatura,
             AVG(r.nota) as promedio_notas,
             COUNT(r.nota) as cantidad_notas,
             MAX(r.nota) as nota_maxima,
-            MIN(r.nota) as nota_minima,
-            es.nombre_establecimiento
+            MIN(r.nota) as nota_minima
         FROM rendimiento r
-        INNER JOIN estudiante e ON r.estudiante_rut = e.rut
-        INNER JOIN establecimiento es ON e.establecimiento_id = es.id
         WHERE (:asignatura IS NULL OR r.asignatura = :asignatura)
-        AND (:promedioMinimo IS NULL OR AVG(r.nota) >= :promedioMinimo)
-        GROUP BY r.estudiante_rut, e.nombre, e.apellido, r.asignatura, es.nombre_establecimiento
+        GROUP BY r.estudiante_rut, r.asignatura
+        HAVING (:promedioMinimo IS NULL OR AVG(r.nota) >= :promedioMinimo)
         ORDER BY r.asignatura, AVG(r.nota) DESC
         """, nativeQuery = true)
     List<Object[]> findRendimientoPorAsignaturaRaw(

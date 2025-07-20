@@ -71,18 +71,18 @@ public class InformeRendimientoService {
             addEstadisticasGenerales(document, asignatura);
 
             // Crear tabla
-            PdfPTable table = new PdfPTable(8);
+            PdfPTable table = new PdfPTable(6);
             table.setWidthPercentage(100);
             table.setSpacingBefore(10f);
             table.setSpacingAfter(10f);
 
             // Definir anchos de columnas
-            float[] columnWidths = {12f, 20f, 15f, 10f, 8f, 8f, 8f, 19f};
+            float[] columnWidths = {20f, 25f, 15f, 10f, 15f, 15f};
             table.setWidths(columnWidths);
 
             // Headers
-            Font headerFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 8, BaseColor.WHITE);
-            String[] headers = {"RUT", "Nombre Completo", "Asignatura", "Promedio", "Cant. Notas", "Nota Máx.", "Nota Mín.", "Establecimiento"};
+            Font headerFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 9, BaseColor.WHITE);
+            String[] headers = {"RUT Estudiante", "Asignatura", "Promedio", "Cant. Notas", "Nota Máxima", "Nota Mínima"};
             
             for (String header : headers) {
                 PdfPCell cell = new PdfPCell(new Phrase(header, headerFont));
@@ -94,16 +94,13 @@ public class InformeRendimientoService {
             }
 
             // Datos
-            Font dataFont = FontFactory.getFont(FontFactory.HELVETICA, 7);
-            Font excellentFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 7, BaseColor.GREEN);
-            Font poorFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 7, BaseColor.RED);
+            Font dataFont = FontFactory.getFont(FontFactory.HELVETICA, 8);
+            Font excellentFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 8, BaseColor.GREEN);
+            Font poorFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 8, BaseColor.RED);
             
             for (RendimientoAsignaturaDTO rendimiento : rendimientos) {
                 // RUT
                 table.addCell(createDataCell(rendimiento.getEstudianteRut(), dataFont));
-                
-                // Nombre completo
-                table.addCell(createDataCell(rendimiento.getNombreCompleto(), dataFont));
                 
                 // Asignatura
                 table.addCell(createDataCell(rendimiento.getAsignatura(), dataFont));
@@ -125,9 +122,6 @@ public class InformeRendimientoService {
                 
                 // Nota mínima
                 table.addCell(createDataCell(String.format("%.1f", rendimiento.getNotaMinima()), dataFont));
-                
-                // Establecimiento
-                table.addCell(createDataCell(rendimiento.getNombreEstablecimiento(), dataFont));
             }
 
             document.add(table);
@@ -136,9 +130,6 @@ public class InformeRendimientoService {
             if (asignatura == null) {
                 addResumenPorAsignatura(document, rendimientos);
             }
-
-            // Resumen por establecimiento
-            addResumenPorEstablecimiento(document, rendimientos);
         }
 
         // Pie de página
@@ -208,28 +199,6 @@ public class InformeRendimientoService {
         }
     }
 
-    private void addResumenPorEstablecimiento(Document document, List<RendimientoAsignaturaDTO> rendimientos) 
-            throws DocumentException {
-        
-        // Contar por establecimiento
-        java.util.Map<String, Long> resumenPorEstablecimiento = rendimientos.stream()
-                .collect(java.util.stream.Collectors.groupingBy(
-                    RendimientoAsignaturaDTO::getNombreEstablecimiento,
-                    java.util.stream.Collectors.counting()
-                ));
-
-        Paragraph resumenTitle = new Paragraph("\nResumen por Establecimiento", 
-                FontFactory.getFont(FontFactory.HELVETICA_BOLD, 12));
-        resumenTitle.setSpacingBefore(20);
-        document.add(resumenTitle);
-
-        Font resumenFont = FontFactory.getFont(FontFactory.HELVETICA, 10);
-        for (java.util.Map.Entry<String, Long> entry : resumenPorEstablecimiento.entrySet()) {
-            Paragraph resumen = new Paragraph("• " + entry.getKey() + ": " + entry.getValue() + " registro(s)", resumenFont);
-            document.add(resumen);
-        }
-    }
-
     public List<RendimientoAsignaturaDTO> obtenerRendimientoPorAsignatura(String asignatura, BigDecimal promedioMinimo) {
         List<Object[]> resultados = rendimientoRepository.findRendimientoPorAsignaturaRaw(asignatura, promedioMinimo);
         List<RendimientoAsignaturaDTO> rendimientos = new ArrayList<>();
@@ -237,14 +206,11 @@ public class InformeRendimientoService {
         for (Object[] resultado : resultados) {
             RendimientoAsignaturaDTO rendimiento = new RendimientoAsignaturaDTO(
                 (String) resultado[0],  // estudiante_rut
-                (String) resultado[1],  // nombre
-                (String) resultado[2],  // apellido
-                (String) resultado[3],  // asignatura
-                new BigDecimal(resultado[4].toString()),  // promedio_notas
-                ((Number) resultado[5]).intValue(),  // cantidad_notas
-                new BigDecimal(resultado[6].toString()),  // nota_maxima
-                new BigDecimal(resultado[7].toString()),  // nota_minima
-                (String) resultado[8]   // nombre_establecimiento
+                (String) resultado[1],  // asignatura
+                new BigDecimal(resultado[2].toString()),  // promedio_notas
+                ((Number) resultado[3]).intValue(),  // cantidad_notas
+                new BigDecimal(resultado[4].toString()),  // nota_maxima
+                new BigDecimal(resultado[5].toString())   // nota_minima
             );
             rendimientos.add(rendimiento);
         }
