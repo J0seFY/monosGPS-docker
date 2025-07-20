@@ -1,12 +1,11 @@
 package com.buscarpersonas.Controller;
 
-import com.buscarpersonas.dto.ReporteRendimientoDTO;
 import com.buscarpersonas.service.ReporteRendimientoService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/reportesRendimiento")
@@ -18,8 +17,23 @@ public class ReporteRendimientoController {
         this.service = service;
     }
 
-    @GetMapping("/api/reportes/rendimiento")
-    public List<ReporteRendimientoDTO> obtenerReporte() {
-        return service.generarReporte();
+    @GetMapping("/rendimiento")
+    public ResponseEntity<ByteArrayResource> obtenerReporteEnPDF() {
+        try {
+            byte[] pdfBytes = service.generarReportePDF();
+
+            ByteArrayResource resource = new ByteArrayResource(pdfBytes);
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=reporte_rendimiento.pdf");
+
+            return ResponseEntity.ok()
+                    .headers(headers)
+                    .contentLength(pdfBytes.length)
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(resource);
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
     }
 }
