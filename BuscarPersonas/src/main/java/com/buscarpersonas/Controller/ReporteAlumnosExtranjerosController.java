@@ -13,7 +13,6 @@ import java.time.format.DateTimeFormatter;
 
 @RestController
 @RequestMapping("/api/reportes")
-@CrossOrigin(origins = "*")
 public class ReporteAlumnosExtranjerosController {
     
     @Autowired
