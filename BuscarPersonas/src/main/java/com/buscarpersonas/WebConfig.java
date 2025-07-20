@@ -11,12 +11,11 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOriginPatterns(
-                    "http://monos.local:*",
-                "http://monos.local",        // Ingress local
-                "http://*monos.local")// Permite cualquier puerto en localhost
-                .allowedMethods("GET", "POST", "PUT", "DELETE","PATCH")
+                .allowedOrigins(
+                        "http://pacheco.chillan.ubiobio.cl:8000")
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH")
                 .allowedHeaders("*")
-                .allowCredentials(true);  // Habilita las credenciales
+                .allowCredentials(true);
     }
+
 }
