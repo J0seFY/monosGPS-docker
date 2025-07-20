@@ -11,14 +11,19 @@ import java.util.List;
 @Repository
 public interface ReporteInasistenciasRepository extends CrudRepository<Asistencia, Long> {
 
-    @Query("SELECT new com.buscarpersonas.dto.ReporteInasistenciasDTO(e.comuna, e.nombre, est.nombre, est.apellido, COUNT(a)) " +
-           "FROM Asistencia a " +
-           "JOIN Estudiante est ON a.estudianteRut = est.rut " +
-           "JOIN Establecimiento e ON est.establecimiento.id = e.id " +
-           "WHERE a.presente = false " +
-           "GROUP BY e.comuna, e.nombre, est.nombre, est.apellido " +
-           "ORDER BY e.comuna, e.nombre, est.apellido")
-    List<ReporteInasistenciasDTO> obtenerInasistenciasComunal();
+       @Query("""
+              SELECT new com.buscarpersonas.dto.ReporteInasistenciasDTO(
+                  e.comuna, e.nombre, est.nombre, est.apellido, COUNT(a)
+              )
+              FROM Asistencia a
+              JOIN a.estudiante est
+              JOIN est.establecimiento e
+              WHERE a.presente = false
+              GROUP BY e.comuna, e.nombre, est.nombre, est.apellido
+              ORDER BY e.comuna, e.nombre, est.apellido
+          """)
+          List<ReporteInasistenciasDTO> obtenerInasistenciasComunal();
+          
 
     @Query("SELECT new com.buscarpersonas.dto.ReporteInasistenciasDTO(e.comuna, e.nombre, est.nombre, est.apellido, COUNT(a)) " +
            "FROM Asistencia a " +
