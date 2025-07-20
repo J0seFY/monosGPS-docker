@@ -54,9 +54,12 @@ export class GenerarReportesComponent {
         break;
       case 'Listado de accidentes escolares a nivel comunal':
         this.downloadFromUrl('http://pacheco.chillan.ubiobio.cl:8000/api/reportesAccidentes/accidentes', 'accidentes-escolares.pdf');
-        break;
+        break; 
       case 'Informe de asistencia diaria de todos los establecimientos':
         this.downloadFromUrl('http://pacheco.chillan.ubiobio.cl:8000/api/reportes/asistencia/pdf?fecha=2025-07-21', 'asistencia-diaria.pdf');
+        break;
+      case 'Informe de rendimiento a nivel comunal y por establecimiento':
+        this.downloadFromUrl('http://pacheco.chillan.ubiobio.cl:8000/api/informes/rendimiento/pdf', 'informe-rendimiento.pdf');
         break;
       case 'Reporte de inasistencias a nivel comunal y por establecimiento':
         this.downloadFromUrl('http://pacheco.chillan.ubiobio.cl:8000/api/reportes/asistencia/pdf?fecha=2025-07-21', 'reporte-inasistencias.pdf');
