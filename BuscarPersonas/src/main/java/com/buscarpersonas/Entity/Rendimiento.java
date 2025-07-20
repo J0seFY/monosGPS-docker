@@ -1,6 +1,7 @@
 package com.buscarpersonas.Entity;
 
 import jakarta.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "rendimiento")
@@ -10,90 +11,54 @@ public class Rendimiento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nombre_alumno", nullable = false)
-    private String nombreAlumno;
+    @Column(name = "estudiante_rut")
+    private String estudianteRut;
 
-    @Column(name = "curso", nullable = false)
-    private String curso;
+    @Column(name = "asignatura")
+    private String asignatura;
 
-    @Column(name = "establecimiento", nullable = false)
-    private String establecimiento;
+    @Column(name = "nota")
+    private Double nota;
 
-    @Column(name = "comuna", nullable = false)
-    private String comuna;
+    @Column(name = "fecha")
+    private LocalDate fecha;
 
-    @Column(name = "promedio_notas")
-    private Double promedioNotas;
+    // Constructor vacío
+    public Rendimiento() {}
 
-    @Column(name = "asistencia")
-    private Double asistencia;
-
-    @Column(name = "observaciones")
-    private String observaciones;
-
-    // Getters y Setters
-
+    // Getters y setters
     public Long getId() {
         return id;
     }
-
     public void setId(Long id) {
         this.id = id;
     }
 
-    public String getNombreAlumno() {
-        return nombreAlumno;
+    public String getEstudianteRut() {
+        return estudianteRut;
+    }
+    public void setEstudianteRut(String estudianteRut) {
+        this.estudianteRut = estudianteRut;
     }
 
-    public void setNombreAlumno(String nombreAlumno) {
-        this.nombreAlumno = nombreAlumno;
+    public String getAsignatura() {
+        return asignatura;
+    }
+    public void setAsignatura(String asignatura) {
+        this.asignatura = asignatura;
     }
 
-    public String getCurso() {
-        return curso;
+    public Double getNota() {
+        return nota;
+    }
+    public void setNota(Double nota) {
+        this.nota = nota;
     }
 
-    public void setCurso(String curso) {
-        this.curso = curso;
+    public LocalDate getFecha() {
+        return fecha;
     }
-
-    public String getEstablecimiento() {
-        return establecimiento;
-    }
-
-    public void setEstablecimiento(String establecimiento) {
-        this.establecimiento = establecimiento;
-    }
-
-    public String getComuna() {
-        return comuna;
-    }
-
-    public void setComuna(String comuna) {
-        this.comuna = comuna;
-    }
-
-    public Double getPromedioNotas() {
-        return promedioNotas;
-    }
-
-    public void setPromedioNotas(Double promedioNotas) {
-        this.promedioNotas = promedioNotas;
-    }
-
-    public Double getAsistencia() {
-        return asistencia;
-    }
-
-    public void setAsistencia(Double asistencia) {
-        this.asistencia = asistencia;
-    }
-
-    public String getObservaciones() {
-        return observaciones;
-    }
-
-    public void setObservaciones(String observaciones) {
-        this.observaciones = observaciones;
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
     }
 }
