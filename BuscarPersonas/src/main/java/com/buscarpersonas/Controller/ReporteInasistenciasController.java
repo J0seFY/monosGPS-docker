@@ -6,7 +6,7 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/reportesInasistencias")
+@RequestMapping("/api/reportesInasistencias")
 public class ReporteInasistenciasController {
 
     @Autowired
