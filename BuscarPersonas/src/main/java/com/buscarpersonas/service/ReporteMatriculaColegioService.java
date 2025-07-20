@@ -21,6 +21,11 @@ public class ReporteMatriculaColegioService {
 
     public ByteArrayInputStream generarPdfPorEstablecimiento(Integer idEstablecimiento) {
         List<ReporteMatriculaDTO> datos = repository.obtenerReporteMatriculaPorEstablecimiento(idEstablecimiento);
+
+        if (datos.isEmpty()) {
+            throw new IllegalArgumentException(
+                    "No se encontraron matrículas para el establecimiento ID: " + idEstablecimiento);
+        }
         Document document = new Document();
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
@@ -36,7 +41,7 @@ public class ReporteMatriculaColegioService {
             document.add(Chunk.NEWLINE);
 
             PdfPTable table = new PdfPTable(6);
-            table.setWidths(new int[]{3, 3, 3, 2, 2, 2});
+            table.setWidths(new int[] { 3, 3, 3, 2, 2, 2 });
             table.addCell("Nombre");
             table.addCell("Apellido");
             table.addCell("RUT");
