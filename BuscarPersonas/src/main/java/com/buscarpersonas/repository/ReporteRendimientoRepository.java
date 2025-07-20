@@ -9,12 +9,14 @@ import java.util.List;
 public interface ReporteRendimientoRepository extends CrudRepository<RendimientoEscolar, Long> {
 
     @Query(value = """
-        SELECT c.nombre AS comuna, e.nombre AS establecimiento, AVG(r.promedio) AS promedio
-        FROM rendimiento_escolar r
-        JOIN establecimiento e ON e.id = r.establecimiento_id
-        JOIN comuna c ON c.id = e.comuna_id
-        GROUP BY c.nombre, e.nombre
-        ORDER BY c.nombre, e.nombre
+        SELECT est.comuna AS comuna,
+               est.nombre AS establecimiento,
+               AVG(r.nota) AS promedio
+        FROM rendimiento r
+        JOIN estudiante e ON e.rut = r.estudiante_rut
+        JOIN establecimiento est ON est.id = e.establecimiento_id
+        GROUP BY est.comuna, est.nombre
+        ORDER BY est.comuna, est.nombre
         """, nativeQuery = true)
     List<Object[]> obtenerPromedioRendimientoPorComunaYEstablecimiento();
 }
