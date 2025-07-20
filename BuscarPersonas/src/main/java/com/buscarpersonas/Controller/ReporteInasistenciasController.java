@@ -12,7 +12,7 @@ public class ReporteInasistenciasController {
     @Autowired
     private ReporteInasistenciasService service;
 
-    @GetMapping("/inasistencias/comunal")
+    @GetMapping("/inasistencias/comunaal")
     public ResponseEntity<byte[]> descargarComunal() {
         byte[] contenido = service.generarPDFComunal().readAllBytes();
 
