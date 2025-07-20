@@ -29,6 +29,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
+      - name: Run tests with Maven
+        working-directory: ./AuthService
+        run: mvn test        
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
