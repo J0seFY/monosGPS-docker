@@ -15,6 +15,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.ArrayList;
 
 @Service
 public class InformeRepitenciaService {
@@ -25,8 +26,7 @@ public class InformeRepitenciaService {
     public byte[] generarInformeRepitenciaPDF(BigDecimal promedioMinimo, BigDecimal asistenciaMinima) 
             throws DocumentException, IOException {
         
-        List<EstudianteRepitenciaDTO> estudiantes = estudianteRepitenciaRepository
-                .findEstudiantesConRiesgoRepitencia(promedioMinimo, asistenciaMinima);
+        List<EstudianteRepitenciaDTO> estudiantes = obtenerEstudiantesConRiesgo(promedioMinimo, asistenciaMinima);
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         Document document = new Document(PageSize.A4, 20, 20, 30, 30);
@@ -155,6 +155,22 @@ public class InformeRepitenciaService {
     }
 
     public List<EstudianteRepitenciaDTO> obtenerEstudiantesConRiesgo(BigDecimal promedioMinimo, BigDecimal asistenciaMinima) {
-        return estudianteRepitenciaRepository.findEstudiantesConRiesgoRepitencia(promedioMinimo, asistenciaMinima);
+        List<Object[]> resultados = estudianteRepitenciaRepository.findEstudiantesConRiesgoRepitenciaRaw(promedioMinimo, asistenciaMinima);
+        List<EstudianteRepitenciaDTO> estudiantes = new ArrayList<>();
+        
+        for (Object[] resultado : resultados) {
+            EstudianteRepitenciaDTO estudiante = new EstudianteRepitenciaDTO(
+                (String) resultado[0],  // rut
+                (String) resultado[1],  // nombre
+                (String) resultado[2],  // apellido
+                (String) resultado[3],  // curso
+                new BigDecimal(resultado[4].toString()),  // promedio_notas
+                new BigDecimal(resultado[5].toString()),  // porcentaje_asistencia
+                (String) resultado[6]   // nombre_establecimiento
+            );
+            estudiantes.add(estudiante);
+        }
+        
+        return estudiantes;
     }
 }
