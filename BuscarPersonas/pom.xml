@@ -112,6 +112,13 @@
             <version>1.3.30</version>
         </dependency>
 
+        <!-- Para manejo de fechas en el PDF -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
+        </dependency>
+
         <!-- Jakarta Persistence API -->
         <dependency>
             <groupId>jakarta.persistence</groupId>

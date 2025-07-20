@@ -7,6 +7,7 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
+@Table(name = "establecimiento") // <- Se sugiere agregar esto
 @Getter
 @Setter
 public class Establecimiento {
@@ -15,24 +16,26 @@ public class Establecimiento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, length = 100)
     private String nombre;
+
+    @Column(nullable = false, length = 100)
     private String direccion;
-    private String telefono;
 
     @Column(nullable = false, length = 100)
     private String comuna;
 
-    @OneToMany(mappedBy = "establecimiento", cascade = CascadeType.ALL, orphanRemoval = true)
+    private String telefono;
+
+    @OneToMany(mappedBy = "establecimiento", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Estudiante> estudiantes;
 
-    @OneToMany(mappedBy = "establecimiento", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "establecimiento", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Profesor> profesores;
 
-    // Constructor vacío (ya lo tienes)
     public Establecimiento() {
     }
 
-    // Constructor que acepta nombre (para tests o creación rápida)
     public Establecimiento(String nombre) {
         this.nombre = nombre;
     }
