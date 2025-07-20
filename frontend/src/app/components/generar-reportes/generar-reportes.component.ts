@@ -43,8 +43,8 @@ export class GenerarReportesComponent {
   }
 
   downloadCentralizacionReport() {
-    const url = 'http://pacheco.chillan.ubiobio.cl:8000/api/reportes/matriculas-comunales/pdf?comuna=Chillán';
-    
+    const url = 'http://pacheco.chillan.ubiobio.cl:8000/api/reportesPorcolegio/Colegio/matricula/1';
+
     this.http.get(url, { responseType: 'blob' }).subscribe({
       next: (response: Blob) => {
         // Crear un blob URL y descargar el archivo
