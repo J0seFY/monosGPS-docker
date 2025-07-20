@@ -22,7 +22,6 @@ import com.itextpdf.text.DocumentException;
 
 @RestController
 @RequestMapping("/api/reportes")
-@CrossOrigin(origins = "*")
 public class ReporteMatriculaController {
     
     private static final Logger logger = LoggerFactory.getLogger(ReporteMatriculaController.class);
