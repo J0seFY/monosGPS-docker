@@ -10,7 +10,8 @@ export class CarruselComponent {
   imagenes = [
     'HD-wallpaper-anime-school-anime-anime-nature-nature-anime-scenery-scenery.jpg',
     'EP1138_Escuela_de_Ciudad_Carmín.png',
-    'saladeclases.png'
+    'saladeclases.png',
+    'FotoParaCarrusel.png'
   ];
 
   indiceActual = 0;
