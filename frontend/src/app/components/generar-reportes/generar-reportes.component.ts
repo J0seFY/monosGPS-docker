@@ -17,9 +17,7 @@ export class GenerarReportesComponent {
     'Listado de alumnos retirados',
     'Listado de posibles repitencias por establecimiento, curso y asignaturas',
     'Listado de accidentes escolares a nivel comunal',
-    'Reportes de resultados comunal: SIMCE',
-    'Reportes de resultados comunal: PAES ',
-    'Reportes de resultados comunal: Cobertura Curricular',
+    'Reportes de resultados comunal: SIMCE y PAES',
     'Informe de asistencia diaria de todos los establecimientos',
     'Informe de rendimiento a nivel comunal y por establecimiento',
     'Reporte de inasistencias a nivel comunal y por establecimiento',
@@ -54,7 +52,10 @@ export class GenerarReportesComponent {
         break;
       case 'Listado de accidentes escolares a nivel comunal':
         this.downloadFromUrl('http://pacheco.chillan.ubiobio.cl:8000/api/reportesAccidentes/accidentes', 'accidentes-escolares.pdf');
-        break; 
+        break;
+      case 'Reportes de resultados comunal: SIMCE y PAES':
+        this.downloadFromUrl('http://pacheco.chillan.ubiobio.cl:8000/api/reportes/simce-paes/1/pdf', 'resultados-comunal.pdf');
+        break;
       case 'Informe de asistencia diaria de todos los establecimientos':
         this.downloadFromUrl('http://pacheco.chillan.ubiobio.cl:8000/api/reportes/asistencia/pdf?fecha=2025-07-21', 'asistencia-diaria.pdf');
         break;
