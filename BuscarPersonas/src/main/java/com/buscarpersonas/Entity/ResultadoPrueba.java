@@ -1,4 +1,4 @@
-package com.buscarpersonas.entity;
+package com.buscarpersonas.Entity;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
