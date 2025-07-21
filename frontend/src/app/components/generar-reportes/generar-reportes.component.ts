@@ -33,21 +33,52 @@ export class GenerarReportesComponent {
   }
 
   onReportSelected(report: string) {
-    if (report === 'Centralización de información de todas las comunidades educativas') {
-      this.downloadCentralizacionReport();
-    } else if (report === 'Matrícula Comunal ') {
-      this.downloadMatriculaComunalReport();
+    switch (report.trim()) {
+      case 'Centralización de información de todas las comunidades educativas':
+        this.downloadCentralizacionReport();
+        break;
+      case 'Matrícula Comunal':
+        this.downloadMatriculaComunalReport();
+        break;
+      case 'Matrícula por colegio':
+        this.downloadFromUrl('http://pacheco.chillan.ubiobio.cl:8000/api/reportes/matricula/establecimiento/1/pdf', 'matricula-por-colegio.pdf');
+        break;
+      case 'Listado de alumnos extranjeros':
+        this.downloadFromUrl('http://pacheco.chillan.ubiobio.cl:8000/api/reportes/estudiantes-extranjeros/pdf', 'alumnos-extranjeros.pdf');
+        break;
+      case 'Listado de alumnos retirados':
+        this.downloadFromUrl('http://pacheco.chillan.ubiobio.cl:8000/api/reportes/estudiantes-retirados/pdf/establecimiento/1', 'alumnos-retirados.pdf');
+        break;
+      case 'Listado de posibles repitencias por establecimiento, curso y asignaturas':
+        this.downloadFromUrl('http://pacheco.chillan.ubiobio.cl:8000/api/informes/repitencia/pdf', 'posibles-repitencias.pdf');
+        break;
+      case 'Listado de accidentes escolares a nivel comunal':
+        this.downloadFromUrl('http://pacheco.chillan.ubiobio.cl:8000/api/reportesAccidentes/accidentes', 'accidentes-escolares.pdf');
+        break; 
+      case 'Informe de asistencia diaria de todos los establecimientos':
+        this.downloadFromUrl('http://pacheco.chillan.ubiobio.cl:8000/api/reportes/asistencia/pdf?fecha=2025-07-21', 'asistencia-diaria.pdf');
+        break;
+      case 'Informe de rendimiento a nivel comunal y por establecimiento':
+        this.downloadFromUrl('http://pacheco.chillan.ubiobio.cl:8000/api/informes/rendimiento/pdf', 'informe-rendimiento.pdf');
+        break;
+      case 'Reporte de inasistencias a nivel comunal y por establecimiento':
+        this.downloadFromUrl('http://pacheco.chillan.ubiobio.cl:8000/api/reportes/asistencia/pdf?fecha=2025-07-21', 'reporte-inasistencias.pdf');
+        break;
+      case 'Reporte de funcionarios a nivel comunal y por establecimiento':
+        this.downloadFromUrl('http://pacheco.chillan.ubiobio.cl:8000/api/reportesFuncionarios/funcionarios/comunal', 'funcionarios-comunal.pdf');
+        break;
+      default:
+        alert('Este reporte aún no está implementado.');
     }
-    // Cerrar el dropdown después de seleccionar
+
     this.isOpen = false;
   }
 
   downloadCentralizacionReport() {
-    const url = 'http://pacheco.chillan.ubiobio.cl:8000/api/reportesPorcolegio/Colegio/matricula/1';
+    const url = 'http://pacheco.chillan.ubiobio.cl:8000/api/reportes/matriculas-comunales/informe-general';
 
     this.http.get(url, { responseType: 'blob' }).subscribe({
       next: (response: Blob) => {
-        // Crear un blob URL y descargar el archivo
         const blob = new Blob([response], { type: 'application/pdf' });
         const downloadURL = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
@@ -64,59 +95,34 @@ export class GenerarReportesComponent {
   }
 
   downloadMatriculaComunalReport() {
-    const url = 'http://pacheco.chillan.ubiobio.cl:8000/api/reportes/matriculas-comunales/certificado?comuna=Chillán';
+    const url = 'http://pacheco.chillan.ubiobio.cl:8000/api/reportes/matriculas-comunales/pdf?comuna=Chillán';
     
-    console.log('Descargando desde:', url);
-    
-    this.http.get(url, { 
-      responseType: 'blob',
-      headers: {
-        'Accept': 'application/pdf'
-      }
-    }).subscribe({
+    this.http.get(url, { responseType: 'blob' }).subscribe({
       next: (response: Blob) => {
-        console.log('Respuesta recibida:', response);
-        console.log('Tamaño del blob:', response.size);
-        console.log('Tipo del blob:', response.type);
-        
-        // Verificar que la respuesta sea válida
         if (response.size === 0) {
           alert('El archivo descargado está vacío. Verifique el reporte.');
           return;
         }
-        
-        // Verificar si realmente es un PDF
+
         if (response.type && !response.type.includes('pdf') && !response.type.includes('octet-stream')) {
           console.warn('El tipo de archivo no parece ser PDF:', response.type);
-          // Intentar leer el contenido como texto para ver si hay un error
           response.text().then(text => {
             console.log('Contenido de la respuesta:', text.substring(0, 200));
           });
         }
-        
-        // Crear un blob URL y descargar el archivo
+
         const blob = new Blob([response], { type: 'application/pdf' });
         const downloadURL = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = downloadURL;
         link.download = 'matricula-comunal.pdf';
-        
-        // Forzar la descarga
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-        
-        // Limpiar el URL después de un breve delay
-        setTimeout(() => {
-          window.URL.revokeObjectURL(downloadURL);
-        }, 100);
+        setTimeout(() => window.URL.revokeObjectURL(downloadURL), 100);
       },
       error: (error: HttpErrorResponse) => {
         console.error('Error completo:', error);
-        console.log('Status:', error.status);
-        console.log('Status Text:', error.statusText);
-        console.log('Error message:', error.message);
-        
         if (error.status === 0) {
           alert('Error de conexión. Verifique que el servidor esté disponible y que no haya problemas de CORS.');
         } else if (error.status === 404) {
@@ -124,6 +130,31 @@ export class GenerarReportesComponent {
         } else {
           alert(`Error al descargar el reporte (${error.status}): ${error.message}`);
         }
+      }
+    });
+  }
+
+  downloadFromUrl(url: string, filename: string) {
+    this.http.get(url, { responseType: 'blob' }).subscribe({
+      next: (response: Blob) => {
+        if (response.size === 0) {
+          alert('El archivo descargado está vacío.');
+          return;
+        }
+
+        const blob = new Blob([response], { type: 'application/pdf' });
+        const downloadURL = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = downloadURL;
+        link.download = filename;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        setTimeout(() => window.URL.revokeObjectURL(downloadURL), 100);
+      },
+      error: (error: HttpErrorResponse) => {
+        console.error('Error descargando:', error);
+        alert(`Error al descargar el archivo (${error.status}): ${error.message}`);
       }
     });
   }
